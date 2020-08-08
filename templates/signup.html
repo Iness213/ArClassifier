@@ -1,0 +1,48 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ar Classifier | signup</title>
+    <link type="text/css" rel="stylesheet" href="{% static "login.css" %}">
+</head>
+<body class="fixed-aside fixed-content" data-gr-c-s-loaded="true">
+<div class="d-flex flex-column flex">
+    <div class="navbar light bg pos-rlt box-shadow">
+        <div class="mx-auto">
+            <a href="/" class="navbar-brand">
+                <svg viewBox="0 0 24 24" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M19.51 3.08L3.08 19.51c.09.34.27.65.51.9.25.24.56.42.9.51L20.93 4.49c-.19-.69-.73-1.23-1.42-1.41zM11.88 3L3 11.88v2.83L14.71 3h-2.83zM5 3c-1.1 0-2 .9-2 2v2l4-4H5zm14 18c.55 0 1.05-.22 1.41-.59.37-.36.59-.86.59-1.41v-2l-4 4h2zm-9.71 0h2.83L21 12.12V9.29L9.29 21z" fill="#fff" class="fill-theme"></path>
+                </svg>
+                <span class="hidden-folded d-inline">Ar-Classifier</span>
+            </a>
+        </div>
+    </div>
+    <div id="content-body">
+        <div class="py-5 text-center w-100">
+            <div class="mx-auto w-xxl w-auto-xs">
+                <div class="px-3">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <div class="mb-3 text-sm">
+                            <span class="text-muted">By clicking Sign Up, I agree to the</span>
+                            <a href="#">Terms of service</a>
+                            <span class="text-muted">and</span>
+                            <a href="#">Policy Privacy.</a>
+                        </div>
+                        <button type="submit" class="btn primary btn-md">Sign Up</button>
+                    </form>
+                    <div class="py-4 text-center">
+                        <div>Already have an account? <a href="/login" class="text-primary _600">Sign in</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><div id="__lpform_email" style="max-height: 16px; vertical-align: top; position: absolute; top: 182.7px; left: 897.6px; z-index: 16;"><img id="__lpform_email_icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAARNJREFUOBGlU72ORWAQPYREq9CtRryBQqJSaGziATyB1/AaV3c7ryAegUZHfxM1hUTiZ82EXbvVcicx35yZOWe+nxDiOP4E8FjX9WNb/22CILy25kjc3GUyTdkHPsSrk4l8GHFpB2/ZbQFVVXnwbQHXdX8EJEkCJRzHwXa7XLAsC57nQVEUxoZhwPd9aJrG+HASBbZtswDFXdeh73sEQUAQsiwjz3OEYcixrutIkoRr5PgI0zR9Jyj+i7fbxjzP3HOuUYJ3UBQFlmXBOI5omoYb0zQFXVRZlkx+Pp8wTRNVVXH9cCxAZBI5W13XZ4i2bfn7ldzA7VfIsoy1bgsMw/CewHEUcf+rDnxpJS4dIbojsnOiL0hfafwTOClcAAAAAElFTkSuQmCC" style="opacity: 0.6; vertical-align: top;" height="16" width="16"></div><div id="__lpform_password" style="max-height: 16px; vertical-align: top; position: absolute; top: 245.9px; left: 897.6px; z-index: 16;"><img id="__lpform_password_icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAARNJREFUOBGlU72ORWAQPYREq9CtRryBQqJSaGziATyB1/AaV3c7ryAegUZHfxM1hUTiZ82EXbvVcicx35yZOWe+nxDiOP4E8FjX9WNb/22CILy25kjc3GUyTdkHPsSrk4l8GHFpB2/ZbQFVVXnwbQHXdX8EJEkCJRzHwXa7XLAsC57nQVEUxoZhwPd9aJrG+HASBbZtswDFXdeh73sEQUAQsiwjz3OEYcixrutIkoRr5PgI0zR9Jyj+i7fbxjzP3HOuUYJ3UBQFlmXBOI5omoYb0zQFXVRZlkx+Pp8wTRNVVXH9cCxAZBI5W13XZ4i2bfn7ldzA7VfIsoy1bgsMw/CewHEUcf+rDnxpJS4dIbojsnOiL0hfafwTOClcAAAAAElFTkSuQmCC" style="opacity: 0.6; vertical-align: top;" height="16" width="16"></div></body>
+</html>
