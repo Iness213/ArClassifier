@@ -71,3 +71,18 @@ class SignUpForm(forms.ModelForm):
         if email_qs.exists():
             raise forms.ValidationError('This email has already been registered')
         return super(SignUpForm, self).clean()
+
+
+class ForgotPassForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class': 'form-control form-control-lg',
+        'placeholder': 'Enter your E-mail',
+        'required': ''
+    }))
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        email_qs = User.objects.filter(email=email)
+        if not email_qs.exists():
+            raise forms.ValidationError('This is not a registered email')
+        return super(ForgotPassForm, self).clean()
