@@ -1,22 +1,27 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class User(models.Model):
-    login = models.CharField(max_length=12)
-    password = models.CharField()
+class MyUser(AbstractUser):
+    is_banned = models.BooleanField(default=False)
+
+    def ban(self):
+        self.is_banned = True
+        self.save()
 
 
 class Project(models.Model):
-    project_name = models.CharField(max_length=200, unique=True)
-    project_date = models.DateTimeField('creation date')
-    project_description = models.CharField(max_length=300)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    owner = models.ForeignKey(MyUser, related_name='user_owner', on_delete=models.CASCADE)
 
 
 class Dataset(models.Model):
-    dataset_path = models.CharField(max_length=40)
+    name = models.CharField(max_length=255)
+    path = models.CharField(max_length=255)
+    project = models.ForeignKey(Project, related_name='project_project', on_delete=models.CASCADE)
 
-#class Result(models.Model):
 
-
-
+class Keyword(models.Model):
+    word = models.CharField(max_length=255)
+    dataset = models.ForeignKey(Dataset, related_name='dataset_dataset', on_delete=models.CASCADE)
