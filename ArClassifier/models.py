@@ -25,3 +25,8 @@ class Dataset(models.Model):
 class Keyword(models.Model):
     word = models.CharField(max_length=255)
     dataset = models.ForeignKey(Dataset, related_name='dataset_dataset', on_delete=models.CASCADE)
+
+
+class Result(models.Model):
+    category = models.CharField(max_length=255)
+    keyword = models.ForeignKey(Keyword, related_name='keyword_keyword', on_delete=models.CASCADE)
