@@ -1,0 +1,180 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/index.css' %}">
+        <meta charset="utf-8">
+        <title>Ar-Classifier</title>
+        <meta name="description" content="Browser-based text analysis and natural language processing that handles pre-processing, analyzing, and visualization in an easy to use web interface. No prior programming experience required.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui, shrink-to-fit=no" "="">
+        <meta http-equiv=" X-UA-Compatible " content="IE=edge ">
+        <meta name="apple-mobile-web-app-capable " content="yes ">
+        <meta name="apple-mobile-web-app-status-barstyle " content="black-translucent ">
+        <meta name="apple-mobile-web-app-title " content="Ar-Classifier ">
+        <meta name="mobile-web-app-capable " content="yes ">
+
+
+        <style type="text/css">@-webkit-keyframes outerRotate1{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(1turn)}}@-moz-keyframes outerRotate1{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(1turn)}}@-o-keyframes outerRotate1{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(1turn)}}@keyframes outerRotate1{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(1turn)}}@-webkit-keyframes outerRotate2{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-1turn)}}@-moz-keyframes outerRotate2{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-1turn)}}@-o-keyframes outerRotate2{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-1turn)}}@keyframes outerRotate2{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-1turn)}}@-webkit-keyframes textColour{0%{color:#fff}to{color:#3bb2d0}}@-moz-keyframes textColour{0%{color:#fff}to{color:#3bb2d0}}@-o-keyframes textColour{0%{color:#fff}to{color:#3bb2d0}}@keyframes textColour{0%{color:#fff}to{color:#3bb2d0}}.e-loadholder{width:240px;height:240px;border:5px solid #1b5f70;border-radius:120px;box-sizing:border-box}.e-loadholder,.e-loadholder:after{position:absolute;top:50%;left:50%;-webkit-transform:translate(-51%,-50%);-moz-transform:translate(-51%,-50%);-ms-transform:translate(-51%,-50%);-o-transform:translate(-51%,-50%);transform:translate(-51%,-50%)}.e-loadholder:after{content:" ";display:block;background:#f3f6f9;transform-origin:center;z-index:0;width:100px;height:200%;-webkit-animation:outerRotate2 30s linear infinite;-moz-animation:outerRotate2 30s infinite linear;-o-animation:outerRotate2 30s infinite linear;animation:outerRotate2 30s linear infinite}.e-loadholder .m-loader{width:200px;height:200px;color:#888;text-align:center;border:5px solid #2a93ae;border-radius:100px;box-sizing:border-box;z-index:20;text-transform:uppercase}.e-loadholder .m-loader,.e-loadholder .m-loader:after{position:absolute;top:50%;left:50%;-webkit-transform:translate(-51%,-50%);-moz-transform:translate(-51%,-50%);-ms-transform:translate(-51%,-50%);-o-transform:translate(-51%,-50%);transform:translate(-51%,-50%)}.e-loadholder .m-loader:after{content:" ";display:block;background:#f3f6f9;transform-origin:center;z-index:-1;width:100px;height:106%;-webkit-animation:outerRotate1 15s linear infinite;-moz-animation:outerRotate1 15s infinite linear;-o-animation:outerRotate1 15s infinite linear;animation:outerRotate1 15s linear infinite}.e-loadholder .m-loader .e-text{font-size:14px;font-size:1.4rem;line-height:130px;-webkit-animation:textColour 1s linear infinite alternate;-moz-animation:textColour 1s alternate linear infinite;-o-animation:textColour 1s alternate linear infinite;animation:textColour 1s linear infinite alternate;width:140px;height:140px;text-align:center;border:5px solid #3bb2d0;border-radius:70px;box-sizing:border-box;z-index:20}.e-loadholder .m-loader .e-text,.e-loadholder .m-loader .e-text:after,.e-loadholder .m-loader .e-text:before{position:absolute;top:50%;left:50%;-webkit-transform:translate(-51%,-50%);-moz-transform:translate(-51%,-50%);-ms-transform:translate(-51%,-50%);-o-transform:translate(-51%,-50%);transform:translate(-51%,-50%);display:block}.e-loadholder .m-loader .e-text:after,.e-loadholder .m-loader .e-text:before{content:" ";background:#f3f6f9;transform-origin:center;z-index:-1}.e-loadholder .m-loader .e-text:before{width:110%;height:40px;-webkit-animation:outerRotate2 3.5s linear infinite;-moz-animation:outerRotate2 3.5s infinite linear;-o-animation:outerRotate2 3.5s infinite linear;animation:outerRotate2 3.5s linear infinite}.e-loadholder .m-loader .e-text:after{width:40px;height:110%;-webkit-animation:outerRotate1 8s linear infinite;-moz-animation:outerRotate1 8s infinite linear;-o-animation:outerRotate1 8s infinite linear;animation:outerRotate1 8s linear infinite}#particleCanvas-White{width:100%;height:50%;opacity:.1}#particleCanvas-Blue,#particleCanvas-White{position:absolute;top:50%;left:50%;-webkit-transform:translate(-51%,-50%);-moz-transform:translate(-51%,-50%);-ms-transform:translate(-51%,-50%);-o-transform:translate(-51%,-50%);transform:translate(-51%,-50%)}#particleCanvas-Blue{width:300px;height:300px}</style><style type="text/css">.animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.medium{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.infinite{-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}.animated.hinge{-webkit-animation-duration:2s;animation-duration:2s}@-webkit-keyframes wobble{0%{-webkit-transform:none;transform:none}15%{-webkit-transform:translate3d(-25%,0,0) rotate(-5deg);transform:translate3d(-25%,0,0) rotate(-5deg)}30%{-webkit-transform:translate3d(20%,0,0) rotate(3deg);transform:translate3d(20%,0,0) rotate(3deg)}45%{-webkit-transform:translate3d(-15%,0,0) rotate(-3deg);transform:translate3d(-15%,0,0) rotate(-3deg)}60%{-webkit-transform:translate3d(10%,0,0) rotate(2deg);transform:translate3d(10%,0,0) rotate(2deg)}75%{-webkit-transform:translate3d(-5%,0,0) rotate(-1deg);transform:translate3d(-5%,0,0) rotate(-1deg)}to{-webkit-transform:none;transform:none}}@keyframes wobble{0%{-webkit-transform:none;-ms-transform:none;transform:none}15%{-webkit-transform:translate3d(-25%,0,0) rotate(-5deg);-ms-transform:translate3d(-25%,0,0) rotate(-5deg);transform:translate3d(-25%,0,0) rotate(-5deg)}30%{-webkit-transform:translate3d(20%,0,0) rotate(3deg);-ms-transform:translate3d(20%,0,0) rotate(3deg);transform:translate3d(20%,0,0) rotate(3deg)}45%{-webkit-transform:translate3d(-15%,0,0) rotate(-3deg);-ms-transform:translate3d(-15%,0,0) rotate(-3deg);transform:translate3d(-15%,0,0) rotate(-3deg)}60%{-webkit-transform:translate3d(10%,0,0) rotate(2deg);-ms-transform:translate3d(10%,0,0) rotate(2deg);transform:translate3d(10%,0,0) rotate(2deg)}75%{-webkit-transform:translate3d(-5%,0,0) rotate(-1deg);-ms-transform:translate3d(-5%,0,0) rotate(-1deg);transform:translate3d(-5%,0,0) rotate(-1deg)}to{-webkit-transform:none;-ms-transform:none;transform:none}}.wobble{-webkit-animation-name:wobble;animation-name:wobble}@-webkit-keyframes bounceInUp{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:translate3d(0,3000px,0);transform:translate3d(0,3000px,0)}60%{opacity:1;-webkit-transform:translate3d(0,-20px,0);transform:translate3d(0,-20px,0)}75%{-webkit-transform:translate3d(0,10px,0);transform:translate3d(0,10px,0)}90%{-webkit-transform:translate3d(0,-5px,0);transform:translate3d(0,-5px,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}@keyframes bounceInUp{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:translate3d(0,3000px,0);-ms-transform:translate3d(0,3000px,0);transform:translate3d(0,3000px,0)}60%{opacity:1;-webkit-transform:translate3d(0,-20px,0);-ms-transform:translate3d(0,-20px,0);transform:translate3d(0,-20px,0)}75%{-webkit-transform:translate3d(0,10px,0);-ms-transform:translate3d(0,10px,0);transform:translate3d(0,10px,0)}90%{-webkit-transform:translate3d(0,-5px,0);-ms-transform:translate3d(0,-5px,0);transform:translate3d(0,-5px,0)}to{-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0)}}.bounceInUp{-webkit-animation-name:bounceInUp;animation-name:bounceInUp}@-webkit-keyframes bounceInDown{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:translate3d(0,-3000px,0);transform:translate3d(0,-3000px,0)}60%{opacity:1;-webkit-transform:translate3d(0,25px,0);transform:translate3d(0,25px,0)}75%{-webkit-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}90%{-webkit-transform:translate3d(0,5px,0);transform:translate3d(0,5px,0)}to{-webkit-transform:none;transform:none}}@keyframes bounceInDown{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:translate3d(0,-3000px,0);-ms-transform:translate3d(0,-3000px,0);transform:translate3d(0,-3000px,0)}60%{opacity:1;-webkit-transform:translate3d(0,25px,0);-ms-transform:translate3d(0,25px,0);transform:translate3d(0,25px,0)}75%{-webkit-transform:translate3d(0,-10px,0);-ms-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}90%{-webkit-transform:translate3d(0,5px,0);-ms-transform:translate3d(0,5px,0);transform:translate3d(0,5px,0)}to{-webkit-transform:none;-ms-transform:none;transform:none}}.bounceInDown{-webkit-animation-name:bounceInDown;animation-name:bounceInDown}@-webkit-keyframes zoomIn{0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}50%{opacity:1}}@keyframes zoomIn{0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);-ms-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}50%{opacity:1}}.zoomIn{-webkit-animation-name:zoomIn;animation-name:zoomIn}@-webkit-keyframes zoomOutUp{40%{opacity:1;-webkit-transform:scale3d(.475,.475,.475) translate3d(0,60px,0);transform:scale3d(.475,.475,.475) translate3d(0,60px,0);-webkit-animation-timing-function:cubic-bezier(.55,.055,.675,.19);animation-timing-function:cubic-bezier(.55,.055,.675,.19)}to{opacity:0;-webkit-transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);-webkit-transform-origin:center bottom;transform-origin:center bottom;-webkit-animation-timing-function:cubic-bezier(.175,.885,.32,1);animation-timing-function:cubic-bezier(.175,.885,.32,1)}}@keyframes zoomOutUp{40%{opacity:1;-webkit-transform:scale3d(.475,.475,.475) translate3d(0,60px,0);-ms-transform:scale3d(.475,.475,.475) translate3d(0,60px,0);transform:scale3d(.475,.475,.475) translate3d(0,60px,0);-webkit-animation-timing-function:cubic-bezier(.55,.055,.675,.19);animation-timing-function:cubic-bezier(.55,.055,.675,.19)}to{opacity:0;-webkit-transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);-ms-transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);-webkit-transform-origin:center bottom;-ms-transform-origin:center bottom;transform-origin:center bottom;-webkit-animation-timing-function:cubic-bezier(.175,.885,.32,1);animation-timing-function:cubic-bezier(.175,.885,.32,1)}}.zoomOutUp{-webkit-animation-name:zoomOutUp;animation-name:zoomOutUp}@-webkit-keyframes fadeInUpBig{0%{opacity:0;-webkit-transform:translate3d(0,2000px,0);transform:translate3d(0,2000px,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes fadeInUpBig{0%{opacity:0;-webkit-transform:translate3d(0,2000px,0);-ms-transform:translate3d(0,2000px,0);transform:translate3d(0,2000px,0)}to{opacity:1;-webkit-transform:none;-ms-transform:none;transform:none}}.fadeInUpBig{-webkit-animation-name:fadeInUpBig;animation-name:fadeInUpBig}@-webkit-keyframes rubberBand{0%{-webkit-transform:scaleX(1);transform:scaleX(1)}30%{-webkit-transform:scale3d(1.25,.75,1);transform:scale3d(1.25,.75,1)}40%{-webkit-transform:scale3d(.75,1.25,1);transform:scale3d(.75,1.25,1)}50%{-webkit-transform:scale3d(1.15,.85,1);transform:scale3d(1.15,.85,1)}65%{-webkit-transform:scale3d(.95,1.05,1);transform:scale3d(.95,1.05,1)}75%{-webkit-transform:scale3d(1.05,.95,1);transform:scale3d(1.05,.95,1)}to{-webkit-transform:scaleX(1);transform:scaleX(1)}}@keyframes rubberBand{0%{-webkit-transform:scaleX(1);-ms-transform:scaleX(1);transform:scaleX(1)}30%{-webkit-transform:scale3d(1.25,.75,1);-ms-transform:scale3d(1.25,.75,1);transform:scale3d(1.25,.75,1)}40%{-webkit-transform:scale3d(.75,1.25,1);-ms-transform:scale3d(.75,1.25,1);transform:scale3d(.75,1.25,1)}50%{-webkit-transform:scale3d(1.15,.85,1);-ms-transform:scale3d(1.15,.85,1);transform:scale3d(1.15,.85,1)}65%{-webkit-transform:scale3d(.95,1.05,1);-ms-transform:scale3d(.95,1.05,1);transform:scale3d(.95,1.05,1)}75%{-webkit-transform:scale3d(1.05,.95,1);-ms-transform:scale3d(1.05,.95,1);transform:scale3d(1.05,.95,1)}to{-webkit-transform:scaleX(1);-ms-transform:scaleX(1);transform:scaleX(1)}}.rubberBand{-webkit-animation-name:rubberBand;animation-name:rubberBand}@-webkit-keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translate3d(-100%,0,0);-ms-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}to{opacity:1;-webkit-transform:none;-ms-transform:none;transform:none}}.fadeInLeft{-webkit-animation-name:fadeInLeft;animation-name:fadeInLeft}@-webkit-keyframes fadeInRight{0%{opacity:0;-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes fadeInRight{0%{opacity:0;-webkit-transform:translate3d(100%,0,0);-ms-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}to{opacity:1;-webkit-transform:none;-ms-transform:none;transform:none}}.fadeInRight{-webkit-animation-name:fadeInRight;animation-name:fadeInRight}@-webkit-keyframes fadeOutLeft{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}}@keyframes fadeOutLeft{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(-100%,0,0);-ms-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}}.fadeOutLeft{-webkit-animation-name:fadeOutLeft;animation-name:fadeOutLeft}@-webkit-keyframes fadeOutRight{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}}@keyframes fadeOutRight{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(100%,0,0);-ms-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}}.fadeOutRight{-webkit-animation-name:fadeOutRight;animation-name:fadeOutRight}@-webkit-keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}to{opacity:1;-webkit-transform:scaleX(1);transform:scaleX(1)}}@keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);-ms-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}20%{-webkit-transform:scale3d(1.1,1.1,1.1);-ms-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}40%{-webkit-transform:scale3d(.9,.9,.9);-ms-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);-ms-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}80%{-webkit-transform:scale3d(.97,.97,.97);-ms-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}to{opacity:1;-webkit-transform:scaleX(1);-ms-transform:scaleX(1);transform:scaleX(1)}}.bounceIn{-webkit-animation-name:bounceIn;animation-name:bounceIn}@-webkit-keyframes fadeOutUp{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}@keyframes fadeOutUp{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,-100%,0);-ms-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}.fadeOutUp{-webkit-animation-name:fadeOutUp;animation-name:fadeOutUp}</style>
+        <script src="https://use.fontawesome.com/c9112d5e3f.js"></script>
+    </head>
+<body class="fixed-aside fixed-content" data-gr-c-s-loaded="true">
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+<div class="app" id="app">
+    <div id="aside" class="app-aside fade box-shadow-x nav-expand dark fixed-aside fixed-content folded" aria-hidden="true">
+        <div class="sidenav modal-dialog dk">
+            <div class="navbar lt">
+                <a href="/" class="navbar-brand">
+                    <svg viewBox="0 0 24 24" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M19.51 3.08L3.08 19.51c.09.34.27.65.51.9.25.24.56.42.9.51L20.93 4.49c-.19-.69-.73-1.23-1.42-1.41zM11.88 3L3 11.88v2.83L14.71 3h-2.83zM5 3c-1.1 0-2 .9-2 2v2l4-4H5zm14 18c.55 0 1.05-.22 1.41-.59.37-.36.59-.86.59-1.41v-2l-4 4h2zm-9.71 0h2.83L21 12.12V9.29L9.29 21z" fill="#fff" class="fill-theme"></path>
+                    </svg>
+                    <span class="hidden-folded d-inline">Ar-Classifier</span>
+                </a>
+            </div>
+            <div class="flex hide-scroll">
+                <div class="scroll">
+                    <div class="nav-border b-primary" data-nav="data-nav">
+                        <ul class="nav bg">
+                            <li class="sidenavb" id="dashboardLink">
+                                <a href="{% url 'home' %}">
+                                    <span class="nav-icon"> <i class="fa fa-home"></i> </span>
+                                    <span class="nav-text">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb active">
+                                <a href="{% url 'datasets' %}">
+                                    <span class="nav-icon"> <i class="fa fa-folder"></i> </span>
+                                    <span class="nav-text">Datasets</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb">
+                                <a href="{% url 'projects' %}">
+                                    <span class="nav-icon"> <i class="fa fa-book"></i> </span>
+                                    <span class="nav-text">Projects</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb">
+                                <a href="{% url 'classification' %}">
+                    <span class="nav-icon">
+                      <i class="fa fa-chart-line"></i>
+                    </span>
+                                    <span class="nav-text">Classification</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb">
+                                <a href="{% url 'help' %}">
+                    <span class="nav-icon">
+                      <i class="fa fa-hand-pointer"></i>
+                    </span>
+                                    <span class="nav-text">Help</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb">
+                                <a href="{% url 'savedResults' %}">
+                                    <span class="nav-icon"> <i class="fa fa-save"></i> </span>
+                                    <span class="nav-text">Saved Results</span>
+                                </a>
+                            </li>
+                            <li class="pb-2 hidden-folded"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content" class="app-content box-shadow-5 box-radius-7" role="main">
+        <div class="content-header white box-shadow-0" id="content-header">
+            <div class="navbar navbar-expand-lg">
+                <a class="d-lg-none mx-2" data-toggle="modal" data-target="#aside">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                        <path d="M80 304h352v16H80zM80 248h352v16H80zM80 192h352v16H80z"></path>
+                    </svg>
+                </a>
+                <div class="navbar-text nav-title flex" id="pageTitle"></div>
+
+                <span class="white navbar-brand r-r homebuttonwrap">
+            <a href="/analyze">
+              <button class="btn btn-fw mr-3 d-inline text-white w-xs blue">
+                Analyze Text
+              </button>
+            </a>
+          </span>
+
+                <ul class="nav flex-row order-lg-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link px-3" data-toggle="dropdown">
+                            <i class="fa fa-bell text-muted"></i>
+                            <span class="badge badge-pill up danger">0</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right w-lg animate fadeIn mt-2 p-0">
+                            <div class="scrollable hover" style="max-height: 250px">
+                                <div class="list">
+
+                                </div>
+                            </div>
+                            <div class="d-flex px-3 py-2 b-t">
+                                <div class="flex">
+                                    <span>0 Notifications</span>
+                                </div>
+                                <a href="setting.html">See all <i class="fa fa-angle-right text-muted"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown d-flex align-items-center">
+                        <a href="#" data-toggle="dropdown" class="d-flex align-items-center" aria-expanded="false">
+                <span class="avatar w-32">
+                  <img src="https://www.gravatar.com/avatar/1670ab8f230b4899aa093073edae031a?s=200&amp;d=mm">
+                </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right w pt-0 mt-2 animate fadeIn">
+                            <a class="dropdown-item" href="/account">
+                                <span>Account</span>
+                            </a>
+                            <a class="dropdown-item" href="/lists">
+                                <span>Manage Lists</span>
+                            </a>
+                            <div class="dropdown-divider" id="userMenu"></div>
+                            <a class="dropdown-item helpLink" href="/help"> Need help? </a>
+                            <a class="dropdown-item logoutd" href="#">Sign out</a>
+                        </div>
+                    </li>
+                    <li class="d-lg-none d-flex align-items-center">
+                        <a href="#" class="mx-2" data-toggle="collapse" data-target="#navbarToggler">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512">
+                                <path d="M64 144h384v32H64zM64 240h384v32H64zM64 336h384v32H64z"></path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-main" id="content-main"><div class="padding">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box fadeIn animated">
+                        <div class="box-header">
+                            <h2>My Corpora</h2>
+                            <div class="ml-auto">
+                                <a href="/builder"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+                                    <i class="fa fa-wrench"></i> Input text
+                                </button></a>
+                                <a href="/bulkupload"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+                                    <i class="fa fa-upload"></i> Upload file
+                                </button></a>
+                            </div>
+
+                        </div>
+                        <div class="box-divider m-0"></div>
+
+                        <div class="box-body">
+                            <!-- DATA TABLE HERE -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
