@@ -8,12 +8,10 @@ class LogInForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'class': 'form-control form-control-lg',
         'placeholder': 'Enter your E-mail',
-        'required': ''
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control form-control-lg',
         'placeholder': 'Enter your password',
-        'required': ''
     }))
 
     def clean(self, *args, **kwargs):
@@ -21,7 +19,7 @@ class LogInForm(forms.Form):
         password = self.cleaned_data.get('password')
 
         if email and password:
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=email, password=password)
             if not user:
                 raise forms.ValidationError('This user does not exist')
             if not user.check_password(password):
@@ -37,17 +35,14 @@ class SignUpForm(forms.ModelForm):
     email = forms.CharField(widget=forms.EmailInput(attrs={
         'class': 'form-control form-control-lg',
         'placeholder': 'Enter your E-mail',
-        'required': ''
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control form-control-lg',
         'placeholder': 'Enter your password',
-        'required': ''
     }))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control form-control-lg',
         'placeholder': 'Confirm your password',
-        'required': ''
     }))
 
     class Meta:
@@ -77,7 +72,6 @@ class ForgotPassForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'class': 'form-control form-control-lg',
         'placeholder': 'Enter your E-mail',
-        'required': ''
     }))
 
     def clean(self):
