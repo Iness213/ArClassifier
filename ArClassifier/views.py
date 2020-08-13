@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
 from django.shortcuts import render, redirect
 
 from ArClassifier.form import LogInForm, SignUpForm, ForgotPassForm
 from ArClassifier.models import MyUser, Project, Dataset, Keyword, Result
+from Text_Classification.settings import BASE_DIR
 
 UserModel = get_user_model()
 
@@ -76,8 +78,20 @@ def feed_text(request):
 
 
 @login_required(login_url='login/')
-def upload_file(request):
-    return None
+def upload_file(request, id):
+    if request.method == 'POST':
+        project = Project.objects.get(id=id)
+        user_email = request.session['user_email']
+        curernt_user = MyUser.objects.filter(email__exact=user_email).first()
+        file = request.FILES['file']
+        path = BASE_DIR+'/files/'+str(curernt_user.id)+'/'+file.name
+        file_name = default_storage.save(path, file)
+        dataset = Dataset(name=file.name, path=path, project=project)
+        dataset.save()
+    context = {
+        'projectId': id
+    }
+    return render(request, 'uploadFile.html', context)
 
 
 @login_required(login_url='login/')
