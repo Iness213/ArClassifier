@@ -19,6 +19,7 @@
 <body class="fixed-aside fixed-content" data-gr-c-s-loaded="true">
 
 <div class="app" id="app">
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
     <div id="aside" class="app-aside fade box-shadow-x nav-expand dark fixed-aside fixed-content folded" aria-hidden="true">
         <div class="sidenav modal-dialog dk">
             <div class="navbar lt">
@@ -92,7 +93,7 @@
                 <div class="navbar-text nav-title flex" id="pageTitle"></div>
 
                 <span class="white navbar-brand r-r homebuttonwrap">
-            <a href="/analyze">
+            <a href="{% url 'classification' %}">
               <button class="btn btn-fw mr-3 d-inline text-white w-xs blue">
                 Classify
               </button>
