@@ -15,7 +15,7 @@ urlpatterns = [
     path('deleteFile/<int:id>', views.delete_file, name='deleteFile'),
 
     path('feed_text/', views.feed_text, name='feed_text'),
-    path('upload_file/', views.upload_file, name='upload_file'),
+    path('upload_file/<int:id>', views.upload_file, name='upload_file'),
     path('classification/', views.classification, name='classification'),
     path('savedResults/', views.saved_results, name='savedResults'),
     path('help/', views.help, name='help'),
