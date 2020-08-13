@@ -171,7 +171,8 @@
                                             <a href="{% url 'feed_text' %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
                                                 <i class="fa fa-wrench"></i> Feed text
                                             </button></a>
-                                            <a href="{% url 'upload_file' %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+
+                                            <a href="{% url 'upload_file' project.id %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
                                                 <i class="fa fa-upload"></i> Upload file
                                             </button></a>
                                         </div>
