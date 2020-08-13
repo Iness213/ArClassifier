@@ -237,3 +237,5 @@ modules.xml
 
 .vscode
 vscode/
+
+files/*
