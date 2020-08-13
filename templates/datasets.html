@@ -92,7 +92,7 @@
                 <div class="navbar-text nav-title flex" id="pageTitle"></div>
 
                 <span class="white navbar-brand r-r homebuttonwrap">
-            <a href="/analyze">
+            <a href="{% url 'classification' %}">
               <button class="btn btn-fw mr-3 d-inline text-white w-xs blue">
                 Analyze Text
               </button>
@@ -155,10 +155,10 @@
                         <div class="box-header">
                             <h2>My Corpora</h2>
                             <div class="ml-auto">
-                                <a href="/builder"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
-                                    <i class="fa fa-wrench"></i> Input text
+                                <a href="{% url 'feed_text' %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+                                    <i class="fa fa-wrench"></i> Feed text
                                 </button></a>
-                                <a href="/bulkupload"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+                                <a href="{% url 'upload_file' %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
                                     <i class="fa fa-upload"></i> Upload file
                                 </button></a>
                             </div>
