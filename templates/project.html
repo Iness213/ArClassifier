@@ -1,0 +1,236 @@
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" class="__meteor-css__" href="{% static 'css/index.css' %}">
+    <meta charset="utf-8">
+    <title>Ar-Classifier</title>
+    <style type="text/css">@-webkit-keyframes outerRotate1{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(1turn)}}@-moz-keyframes outerRotate1{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(1turn)}}@-o-keyframes outerRotate1{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(1turn)}}@keyframes outerRotate1{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(1turn)}}@-webkit-keyframes outerRotate2{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-1turn)}}@-moz-keyframes outerRotate2{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-1turn)}}@-o-keyframes outerRotate2{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-1turn)}}@keyframes outerRotate2{0%{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-1turn)}}@-webkit-keyframes textColour{0%{color:#fff}to{color:#3bb2d0}}@-moz-keyframes textColour{0%{color:#fff}to{color:#3bb2d0}}@-o-keyframes textColour{0%{color:#fff}to{color:#3bb2d0}}@keyframes textColour{0%{color:#fff}to{color:#3bb2d0}}.e-loadholder{width:240px;height:240px;border:5px solid #1b5f70;border-radius:120px;box-sizing:border-box}.e-loadholder,.e-loadholder:after{position:absolute;top:50%;left:50%;-webkit-transform:translate(-51%,-50%);-moz-transform:translate(-51%,-50%);-ms-transform:translate(-51%,-50%);-o-transform:translate(-51%,-50%);transform:translate(-51%,-50%)}.e-loadholder:after{content:" ";display:block;background:#f3f6f9;transform-origin:center;z-index:0;width:100px;height:200%;-webkit-animation:outerRotate2 30s linear infinite;-moz-animation:outerRotate2 30s infinite linear;-o-animation:outerRotate2 30s infinite linear;animation:outerRotate2 30s linear infinite}.e-loadholder .m-loader{width:200px;height:200px;color:#888;text-align:center;border:5px solid #2a93ae;border-radius:100px;box-sizing:border-box;z-index:20;text-transform:uppercase}.e-loadholder .m-loader,.e-loadholder .m-loader:after{position:absolute;top:50%;left:50%;-webkit-transform:translate(-51%,-50%);-moz-transform:translate(-51%,-50%);-ms-transform:translate(-51%,-50%);-o-transform:translate(-51%,-50%);transform:translate(-51%,-50%)}.e-loadholder .m-loader:after{content:" ";display:block;background:#f3f6f9;transform-origin:center;z-index:-1;width:100px;height:106%;-webkit-animation:outerRotate1 15s linear infinite;-moz-animation:outerRotate1 15s infinite linear;-o-animation:outerRotate1 15s infinite linear;animation:outerRotate1 15s linear infinite}.e-loadholder .m-loader .e-text{font-size:14px;font-size:1.4rem;line-height:130px;-webkit-animation:textColour 1s linear infinite alternate;-moz-animation:textColour 1s alternate linear infinite;-o-animation:textColour 1s alternate linear infinite;animation:textColour 1s linear infinite alternate;width:140px;height:140px;text-align:center;border:5px solid #3bb2d0;border-radius:70px;box-sizing:border-box;z-index:20}.e-loadholder .m-loader .e-text,.e-loadholder .m-loader .e-text:after,.e-loadholder .m-loader .e-text:before{position:absolute;top:50%;left:50%;-webkit-transform:translate(-51%,-50%);-moz-transform:translate(-51%,-50%);-ms-transform:translate(-51%,-50%);-o-transform:translate(-51%,-50%);transform:translate(-51%,-50%);display:block}.e-loadholder .m-loader .e-text:after,.e-loadholder .m-loader .e-text:before{content:" ";background:#f3f6f9;transform-origin:center;z-index:-1}.e-loadholder .m-loader .e-text:before{width:110%;height:40px;-webkit-animation:outerRotate2 3.5s linear infinite;-moz-animation:outerRotate2 3.5s infinite linear;-o-animation:outerRotate2 3.5s infinite linear;animation:outerRotate2 3.5s linear infinite}.e-loadholder .m-loader .e-text:after{width:40px;height:110%;-webkit-animation:outerRotate1 8s linear infinite;-moz-animation:outerRotate1 8s infinite linear;-o-animation:outerRotate1 8s infinite linear;animation:outerRotate1 8s linear infinite}#particleCanvas-White{width:100%;height:50%;opacity:.1}#particleCanvas-Blue,#particleCanvas-White{position:absolute;top:50%;left:50%;-webkit-transform:translate(-51%,-50%);-moz-transform:translate(-51%,-50%);-ms-transform:translate(-51%,-50%);-o-transform:translate(-51%,-50%);transform:translate(-51%,-50%)}#particleCanvas-Blue{width:300px;height:300px}</style><style type="text/css">.animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.medium{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.animated.infinite{-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}.animated.hinge{-webkit-animation-duration:2s;animation-duration:2s}@-webkit-keyframes wobble{0%{-webkit-transform:none;transform:none}15%{-webkit-transform:translate3d(-25%,0,0) rotate(-5deg);transform:translate3d(-25%,0,0) rotate(-5deg)}30%{-webkit-transform:translate3d(20%,0,0) rotate(3deg);transform:translate3d(20%,0,0) rotate(3deg)}45%{-webkit-transform:translate3d(-15%,0,0) rotate(-3deg);transform:translate3d(-15%,0,0) rotate(-3deg)}60%{-webkit-transform:translate3d(10%,0,0) rotate(2deg);transform:translate3d(10%,0,0) rotate(2deg)}75%{-webkit-transform:translate3d(-5%,0,0) rotate(-1deg);transform:translate3d(-5%,0,0) rotate(-1deg)}to{-webkit-transform:none;transform:none}}@keyframes wobble{0%{-webkit-transform:none;-ms-transform:none;transform:none}15%{-webkit-transform:translate3d(-25%,0,0) rotate(-5deg);-ms-transform:translate3d(-25%,0,0) rotate(-5deg);transform:translate3d(-25%,0,0) rotate(-5deg)}30%{-webkit-transform:translate3d(20%,0,0) rotate(3deg);-ms-transform:translate3d(20%,0,0) rotate(3deg);transform:translate3d(20%,0,0) rotate(3deg)}45%{-webkit-transform:translate3d(-15%,0,0) rotate(-3deg);-ms-transform:translate3d(-15%,0,0) rotate(-3deg);transform:translate3d(-15%,0,0) rotate(-3deg)}60%{-webkit-transform:translate3d(10%,0,0) rotate(2deg);-ms-transform:translate3d(10%,0,0) rotate(2deg);transform:translate3d(10%,0,0) rotate(2deg)}75%{-webkit-transform:translate3d(-5%,0,0) rotate(-1deg);-ms-transform:translate3d(-5%,0,0) rotate(-1deg);transform:translate3d(-5%,0,0) rotate(-1deg)}to{-webkit-transform:none;-ms-transform:none;transform:none}}.wobble{-webkit-animation-name:wobble;animation-name:wobble}@-webkit-keyframes bounceInUp{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:translate3d(0,3000px,0);transform:translate3d(0,3000px,0)}60%{opacity:1;-webkit-transform:translate3d(0,-20px,0);transform:translate3d(0,-20px,0)}75%{-webkit-transform:translate3d(0,10px,0);transform:translate3d(0,10px,0)}90%{-webkit-transform:translate3d(0,-5px,0);transform:translate3d(0,-5px,0)}to{-webkit-transform:translateZ(0);transform:translateZ(0)}}@keyframes bounceInUp{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:translate3d(0,3000px,0);-ms-transform:translate3d(0,3000px,0);transform:translate3d(0,3000px,0)}60%{opacity:1;-webkit-transform:translate3d(0,-20px,0);-ms-transform:translate3d(0,-20px,0);transform:translate3d(0,-20px,0)}75%{-webkit-transform:translate3d(0,10px,0);-ms-transform:translate3d(0,10px,0);transform:translate3d(0,10px,0)}90%{-webkit-transform:translate3d(0,-5px,0);-ms-transform:translate3d(0,-5px,0);transform:translate3d(0,-5px,0)}to{-webkit-transform:translateZ(0);-ms-transform:translateZ(0);transform:translateZ(0)}}.bounceInUp{-webkit-animation-name:bounceInUp;animation-name:bounceInUp}@-webkit-keyframes bounceInDown{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:translate3d(0,-3000px,0);transform:translate3d(0,-3000px,0)}60%{opacity:1;-webkit-transform:translate3d(0,25px,0);transform:translate3d(0,25px,0)}75%{-webkit-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}90%{-webkit-transform:translate3d(0,5px,0);transform:translate3d(0,5px,0)}to{-webkit-transform:none;transform:none}}@keyframes bounceInDown{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:translate3d(0,-3000px,0);-ms-transform:translate3d(0,-3000px,0);transform:translate3d(0,-3000px,0)}60%{opacity:1;-webkit-transform:translate3d(0,25px,0);-ms-transform:translate3d(0,25px,0);transform:translate3d(0,25px,0)}75%{-webkit-transform:translate3d(0,-10px,0);-ms-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}90%{-webkit-transform:translate3d(0,5px,0);-ms-transform:translate3d(0,5px,0);transform:translate3d(0,5px,0)}to{-webkit-transform:none;-ms-transform:none;transform:none}}.bounceInDown{-webkit-animation-name:bounceInDown;animation-name:bounceInDown}@-webkit-keyframes zoomIn{0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}50%{opacity:1}}@keyframes zoomIn{0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);-ms-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}50%{opacity:1}}.zoomIn{-webkit-animation-name:zoomIn;animation-name:zoomIn}@-webkit-keyframes zoomOutUp{40%{opacity:1;-webkit-transform:scale3d(.475,.475,.475) translate3d(0,60px,0);transform:scale3d(.475,.475,.475) translate3d(0,60px,0);-webkit-animation-timing-function:cubic-bezier(.55,.055,.675,.19);animation-timing-function:cubic-bezier(.55,.055,.675,.19)}to{opacity:0;-webkit-transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);-webkit-transform-origin:center bottom;transform-origin:center bottom;-webkit-animation-timing-function:cubic-bezier(.175,.885,.32,1);animation-timing-function:cubic-bezier(.175,.885,.32,1)}}@keyframes zoomOutUp{40%{opacity:1;-webkit-transform:scale3d(.475,.475,.475) translate3d(0,60px,0);-ms-transform:scale3d(.475,.475,.475) translate3d(0,60px,0);transform:scale3d(.475,.475,.475) translate3d(0,60px,0);-webkit-animation-timing-function:cubic-bezier(.55,.055,.675,.19);animation-timing-function:cubic-bezier(.55,.055,.675,.19)}to{opacity:0;-webkit-transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);-ms-transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);transform:scale3d(.1,.1,.1) translate3d(0,-2000px,0);-webkit-transform-origin:center bottom;-ms-transform-origin:center bottom;transform-origin:center bottom;-webkit-animation-timing-function:cubic-bezier(.175,.885,.32,1);animation-timing-function:cubic-bezier(.175,.885,.32,1)}}.zoomOutUp{-webkit-animation-name:zoomOutUp;animation-name:zoomOutUp}@-webkit-keyframes fadeInUpBig{0%{opacity:0;-webkit-transform:translate3d(0,2000px,0);transform:translate3d(0,2000px,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes fadeInUpBig{0%{opacity:0;-webkit-transform:translate3d(0,2000px,0);-ms-transform:translate3d(0,2000px,0);transform:translate3d(0,2000px,0)}to{opacity:1;-webkit-transform:none;-ms-transform:none;transform:none}}.fadeInUpBig{-webkit-animation-name:fadeInUpBig;animation-name:fadeInUpBig}@-webkit-keyframes rubberBand{0%{-webkit-transform:scaleX(1);transform:scaleX(1)}30%{-webkit-transform:scale3d(1.25,.75,1);transform:scale3d(1.25,.75,1)}40%{-webkit-transform:scale3d(.75,1.25,1);transform:scale3d(.75,1.25,1)}50%{-webkit-transform:scale3d(1.15,.85,1);transform:scale3d(1.15,.85,1)}65%{-webkit-transform:scale3d(.95,1.05,1);transform:scale3d(.95,1.05,1)}75%{-webkit-transform:scale3d(1.05,.95,1);transform:scale3d(1.05,.95,1)}to{-webkit-transform:scaleX(1);transform:scaleX(1)}}@keyframes rubberBand{0%{-webkit-transform:scaleX(1);-ms-transform:scaleX(1);transform:scaleX(1)}30%{-webkit-transform:scale3d(1.25,.75,1);-ms-transform:scale3d(1.25,.75,1);transform:scale3d(1.25,.75,1)}40%{-webkit-transform:scale3d(.75,1.25,1);-ms-transform:scale3d(.75,1.25,1);transform:scale3d(.75,1.25,1)}50%{-webkit-transform:scale3d(1.15,.85,1);-ms-transform:scale3d(1.15,.85,1);transform:scale3d(1.15,.85,1)}65%{-webkit-transform:scale3d(.95,1.05,1);-ms-transform:scale3d(.95,1.05,1);transform:scale3d(.95,1.05,1)}75%{-webkit-transform:scale3d(1.05,.95,1);-ms-transform:scale3d(1.05,.95,1);transform:scale3d(1.05,.95,1)}to{-webkit-transform:scaleX(1);-ms-transform:scaleX(1);transform:scaleX(1)}}.rubberBand{-webkit-animation-name:rubberBand;animation-name:rubberBand}@-webkit-keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes fadeInLeft{0%{opacity:0;-webkit-transform:translate3d(-100%,0,0);-ms-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}to{opacity:1;-webkit-transform:none;-ms-transform:none;transform:none}}.fadeInLeft{-webkit-animation-name:fadeInLeft;animation-name:fadeInLeft}@-webkit-keyframes fadeInRight{0%{opacity:0;-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes fadeInRight{0%{opacity:0;-webkit-transform:translate3d(100%,0,0);-ms-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}to{opacity:1;-webkit-transform:none;-ms-transform:none;transform:none}}.fadeInRight{-webkit-animation-name:fadeInRight;animation-name:fadeInRight}@-webkit-keyframes fadeOutLeft{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}}@keyframes fadeOutLeft{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(-100%,0,0);-ms-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0)}}.fadeOutLeft{-webkit-animation-name:fadeOutLeft;animation-name:fadeOutLeft}@-webkit-keyframes fadeOutRight{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}}@keyframes fadeOutRight{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(100%,0,0);-ms-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0)}}.fadeOutRight{-webkit-animation-name:fadeOutRight;animation-name:fadeOutRight}@-webkit-keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}to{opacity:1;-webkit-transform:scaleX(1);transform:scaleX(1)}}@keyframes bounceIn{0%,20%,40%,60%,80%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1);transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);-ms-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}20%{-webkit-transform:scale3d(1.1,1.1,1.1);-ms-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}40%{-webkit-transform:scale3d(.9,.9,.9);-ms-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);-ms-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}80%{-webkit-transform:scale3d(.97,.97,.97);-ms-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}to{opacity:1;-webkit-transform:scaleX(1);-ms-transform:scaleX(1);transform:scaleX(1)}}.bounceIn{-webkit-animation-name:bounceIn;animation-name:bounceIn}@-webkit-keyframes fadeOutUp{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}@keyframes fadeOutUp{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,-100%,0);-ms-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}.fadeOutUp{-webkit-animation-name:fadeOutUp;animation-name:fadeOutUp}</style>
+    <script src="https://use.fontawesome.com/c9112d5e3f.js"></script>
+</head>
+<body class="fixed-aside fixed-content" data-gr-c-s-loaded="true">
+
+<div class="app" id="app">
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <div id="aside" class="app-aside fade box-shadow-x nav-expand dark fixed-aside fixed-content" aria-hidden="true">
+        <div class="sidenav modal-dialog dk">
+            <div class="navbar lt">
+                <a href="/" class="navbar-brand">
+                    <svg viewBox="0 0 24 24" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M19.51 3.08L3.08 19.51c.09.34.27.65.51.9.25.24.56.42.9.51L20.93 4.49c-.19-.69-.73-1.23-1.42-1.41zM11.88 3L3 11.88v2.83L14.71 3h-2.83zM5 3c-1.1 0-2 .9-2 2v2l4-4H5zm14 18c.55 0 1.05-.22 1.41-.59.37-.36.59-.86.59-1.41v-2l-4 4h2zm-9.71 0h2.83L21 12.12V9.29L9.29 21z" fill="#fff" class="fill-theme"></path>
+                    </svg>
+                    <span class="hidden-folded d-inline">Ar-Classifier</span>
+                </a>
+            </div>
+            <div class="flex hide-scroll">
+                <div class="scroll">
+                    <div class="nav-border b-primary" data-nav="data-nav">
+                        <ul class="nav bg">
+                            <li class="sidenavb" id="dashboardLink">
+                                <a href="{% url 'home' %}">
+                                    <span class="nav-icon"> <i class="fa fa-home"></i> </span>
+                                    <span class="nav-text">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb">
+                                <a href="{% url 'datasets' %}">
+                                    <span class="nav-icon"> <i class="fa fa-folder"></i> </span>
+                                    <span class="nav-text">Datasets</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb active">
+                                <a href="{% url 'projects' %}">
+                                    <span class="nav-icon"> <i class="fa fa-book"></i> </span>
+                                    <span class="nav-text">Projects</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb">
+                                <a href="{% url 'classification' %}">
+                    <span class="nav-icon">
+                      <i class="fa fa-chart-line"></i>
+                    </span>
+                                    <span class="nav-text">Classification</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb">
+                                <a href="{% url 'help' %}">
+                    <span class="nav-icon">
+                      <i class="fa fa-hand-pointer"></i>
+                    </span>
+                                    <span class="nav-text">Help</span>
+                                </a>
+                            </li>
+                            <li class="sidenavb">
+                                <a href="{% url 'savedResults' %}">
+                                    <span class="nav-icon"> <i class="fa fa-save"></i> </span>
+                                    <span class="nav-text">Saved Results</span>
+                                </a>
+                            </li>
+                            <li class="pb-2 hidden-folded"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content" class="app-content box-shadow-5 box-radius-7" role="main">
+        <div class="content-header white box-shadow-0" id="content-header">
+            <div class="navbar navbar-expand-lg">
+                <a class="d-lg-none mx-2" data-toggle="modal" data-target="#aside">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                        <path d="M80 304h352v16H80zM80 248h352v16H80zM80 192h352v16H80z"></path>
+                    </svg>
+                </a>
+                <div class="navbar-text nav-title flex" id="pageTitle"></div>
+
+                <span class="white navbar-brand r-r homebuttonwrap">
+            <a href="{% url 'classification' %}">
+              <button class="btn btn-fw mr-3 d-inline text-white w-xs blue">
+                Classify
+              </button>
+            </a>
+          </span>
+
+                <ul class="nav flex-row order-lg-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link px-3" data-toggle="dropdown">
+                            <i class="fa fa-bell text-muted"></i>
+                            <span class="badge badge-pill up danger">0</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right w-lg animate fadeIn mt-2 p-0">
+                            <div class="scrollable hover" style="max-height: 250px">
+                                <div class="list">
+
+                                </div>
+                            </div>
+                            <div class="d-flex px-3 py-2 b-t">
+                                <div class="flex">
+                                    <span>0 Notifications</span>
+                                </div>
+                                <a href="setting.html">See all <i class="fa fa-angle-right text-muted"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown d-flex align-items-center">
+                        <a href="#" data-toggle="dropdown" class="d-flex align-items-center" aria-expanded="false">
+                <span class="avatar w-32">
+                  <img src="https://www.gravatar.com/avatar/1670ab8f230b4899aa093073edae031a?s=200&amp;d=mm">
+                </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right w pt-0 mt-2 animate fadeIn">
+                            <a class="dropdown-item" href="/account">
+                                <span>Account</span>
+                            </a>
+                            <a class="dropdown-item" href="/lists">
+                                <span>Manage Lists</span>
+                            </a>
+                            <div class="dropdown-divider" id="userMenu"></div>
+                            <a class="dropdown-item helpLink" href="/help"> Need help? </a>
+                            <a class="dropdown-item logoutd" href="#">Sign out</a>
+                        </div>
+                    </li>
+                    <li class="d-lg-none d-flex align-items-center">
+                        <a href="#" class="mx-2" data-toggle="collapse" data-target="#navbarToggler">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512">
+                                <path d="M64 144h384v32H64zM64 240h384v32H64zM64 336h384v32H64z"></path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-main" id="content-main">
+
+            <div class="padding">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="list-group list-group-gap col-lg-12">
+                                <div class="col-lg-12" >
+                                    <div class="mix list-group-item box ribbonbox" style="width: 100%; margin: 10px 0px 10px 0px">
+                                        <div class="row" style="display: flex; justify-content: space-between;">
+                                            <h4 class="text-primary search2" style="margin-left: 10px">{{ project.name }}</h4>
+                                        </div>
+                                        <p class="d-block mb-2 text-muted" style="font-size: 1.5em;">{{ project.description }}</p>
+                                        <span class="_600 mb-4 mr-5">Creation date: <span class="_400">{{ project.creation_date }}</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spacer">
+                            <br> <br>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box fadeIn animated">
+                                    <div class="box-header">
+                                        <h2>Project Files</h2>
+                                        <div class="ml-auto">
+                                            <a href="{% url 'feed_text' %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+                                                <i class="fa fa-wrench"></i> Feed text
+                                            </button></a>
+                                            <a href="{% url 'upload_file' %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+                                                <i class="fa fa-upload"></i> Upload file
+                                            </button></a>
+                                        </div>
+
+                                    </div>
+                                    <div class="box-divider m-0"></div>
+
+                                    <div class="box-body">
+                                        {% if hasFiles %}
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Creation date</th>
+                                                        <th scope="col">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for file in files %}
+                                                        <tr>
+                                                            <th scope="row">{{ file.id }}</th>
+                                                            <td>{{ file.name }}</td>
+                                                            <td>{{ file.creation_date }}</td>
+                                                            <td>
+                                                                <a href="{% url 'deleteFile' file.id %}">
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                    </svg>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        {% else %}
+                                            <div style="width: auto">
+                                                <svg class="folder-empty-state themed" height="126" viewBox="0 0 150 150" width="auto" focusable="false" role="presentation"><g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><ellipse class="fill-color fill-opacity" cx="75" cy="142" fill="#0061d5" fill-opacity="0.1" rx="32.5" ry="3"></ellipse><path class="fill-color" d="M97,6.1337822 L97,5.49178758 C97,5.2201808 97.2319336,5 97.5,5 C97.7761424,5 98,5.21505737 98,5.49047852 L98,6.1337822 C98.151814,6.22160185 98.2783981,6.348186 98.3662178,6.5 L99.0095215,6.5 C99.2804053,6.5 99.5,6.73193359 99.5,7 C99.5,7.27614237 99.2849426,7.5 99.0095215,7.5 L98.3662178,7.5 C98.2783981,7.651814 98.151814,7.77839815 98,7.8662178 L98,8.50952148 C98,8.78040529 97.7680664,9 97.5,9 C97.2238576,9 97,8.76897915 97,8.49525623 L97,7.8662178 C96.848186,7.77839815 96.7216019,7.651814 96.6337822,7.5 L95.9904785,7.5 C95.7195947,7.5 95.5,7.26806641 95.5,7 C95.5,6.72385763 95.7150574,6.5 95.9904785,6.5 L96.6337822,6.5 C96.7216019,6.348186 96.848186,6.22160185 97,6.1337822 Z M9.5,89.6337822 L9.5,88.9917876 C9.5,88.7201808 9.73193359,88.5 10,88.5 C10.2761424,88.5 10.5,88.7150574 10.5,88.9904785 L10.5,89.6337822 C10.651814,89.7216019 10.7783981,89.848186 10.8662178,90 L11.5095215,90 C11.7804053,90 12,90.2319336 12,90.5 C12,90.7761424 11.7849426,91 11.5095215,91 L10.8662178,91 C10.7783981,91.151814 10.651814,91.2783981 10.5,91.3662178 L10.5,92.0095215 C10.5,92.2804053 10.2680664,92.5 10,92.5 C9.72385763,92.5 9.5,92.2689791 9.5,91.9952562 L9.5,91.3662178 C9.348186,91.2783981 9.22160185,91.151814 9.1337822,91 L8.49047852,91 C8.21959471,91 8,90.7680664 8,90.5 C8,90.2238576 8.21505737,90 8.49047852,90 L9.1337822,90 C9.22160185,89.848186 9.348186,89.7216019 9.5,89.6337822 Z M137.5,84.6337822 L137.5,83.9917876 C137.5,83.7201808 137.731934,83.5 138,83.5 C138.276142,83.5 138.5,83.7150574 138.5,83.9904785 L138.5,84.6337822 C138.651814,84.7216019 138.778398,84.848186 138.866218,85 L139.509521,85 C139.780405,85 140,85.2319336 140,85.5 C140,85.7761424 139.784943,86 139.509521,86 L138.866218,86 C138.778398,86.151814 138.651814,86.2783981 138.5,86.3662178 L138.5,87.0095215 C138.5,87.2804053 138.268066,87.5 138,87.5 C137.723858,87.5 137.5,87.2689791 137.5,86.9952562 L137.5,86.3662178 C137.348186,86.2783981 137.221602,86.151814 137.133782,86 L136.490479,86 C136.219595,86 136,85.7680664 136,85.5 C136,85.2238576 136.215057,85 136.490479,85 L137.133782,85 C137.221602,84.848186 137.348186,84.7216019 137.5,84.6337822 Z M113.5,23.1337822 L113.5,22.4917876 C113.5,22.2201808 113.731934,22 114,22 C114.276142,22 114.5,22.2150574 114.5,22.4904785 L114.5,23.1337822 C114.651814,23.2216019 114.778398,23.348186 114.866218,23.5 L115.509521,23.5 C115.780405,23.5 116,23.7319336 116,24 C116,24.2761424 115.784943,24.5 115.509521,24.5 L114.866218,24.5 C114.778398,24.651814 114.651814,24.7783981 114.5,24.8662178 L114.5,25.5095215 C114.5,25.7804053 114.268066,26 114,26 C113.723858,26 113.5,25.7689791 113.5,25.4952562 L113.5,24.8662178 C113.348186,24.7783981 113.221602,24.651814 113.133782,24.5 L112.490479,24.5 C112.219595,24.5 112,24.2680664 112,24 C112,23.7238576 112.215057,23.5 112.490479,23.5 L113.133782,23.5 C113.221602,23.348186 113.348186,23.2216019 113.5,23.1337822 Z M33.5,20.6337822 L33.5,19.9917876 C33.5,19.7201808 33.7319336,19.5 34,19.5 C34.2761424,19.5 34.5,19.7150574 34.5,19.9904785 L34.5,20.6337822 C34.651814,20.7216019 34.7783981,20.848186 34.8662178,21 L35.5095215,21 C35.7804053,21 36,21.2319336 36,21.5 C36,21.7761424 35.7849426,22 35.5095215,22 L34.8662178,22 C34.7783981,22.151814 34.651814,22.2783981 34.5,22.3662178 L34.5,23.0095215 C34.5,23.2804053 34.2680664,23.5 34,23.5 C33.7238576,23.5 33.5,23.2689791 33.5,22.9952562 L33.5,22.3662178 C33.348186,22.2783981 33.2216019,22.151814 33.1337822,22 L32.4904785,22 C32.2195947,22 32,21.7680664 32,21.5 C32,21.2238576 32.2150574,21 32.4904785,21 L33.1337822,21 C33.2216019,20.848186 33.348186,20.7216019 33.5,20.6337822 Z M132.5,52.6337822 L132.5,51.9917876 C132.5,51.7201808 132.731934,51.5 133,51.5 C133.276142,51.5 133.5,51.7150574 133.5,51.9904785 L133.5,52.6337822 C133.651814,52.7216019 133.778398,52.848186 133.866218,53 L134.509521,53 C134.780405,53 135,53.2319336 135,53.5 C135,53.7761424 134.784943,54 134.509521,54 L133.866218,54 C133.778398,54.151814 133.651814,54.2783981 133.5,54.3662178 L133.5,55.0095215 C133.5,55.2804053 133.268066,55.5 133,55.5 C132.723858,55.5 132.5,55.2689791 132.5,54.9952562 L132.5,54.3662178 C132.348186,54.2783981 132.221602,54.151814 132.133782,54 L131.490479,54 C131.219595,54 131,53.7680664 131,53.5 C131,53.2238576 131.215057,53 131.490479,53 L132.133782,53 C132.221602,52.848186 132.348186,52.7216019 132.5,52.6337822 Z M27.9375,28.7086139 L27.9375,28.3073672 C27.9375,28.137613 28.0824585,28 28.25,28 C28.422589,28 28.5625,28.1344109 28.5625,28.3065491 L28.5625,28.7086139 C28.6573838,28.7635012 28.7364988,28.8426162 28.7913861,28.9375 L29.1934509,28.9375 C29.3627533,28.9375 29.5,29.0824585 29.5,29.25 C29.5,29.422589 29.3655891,29.5625 29.1934509,29.5625 L28.7913861,29.5625 C28.7364988,29.6573838 28.6573838,29.7364988 28.5625,29.7913861 L28.5625,30.1934509 C28.5625,30.3627533 28.4175415,30.5 28.25,30.5 C28.077411,30.5 27.9375,30.355612 27.9375,30.1974433 L27.9375,29.7913861 C27.8426162,29.7364988 27.7635012,29.6573838 27.7086139,29.5625 L27.3065491,29.5625 C27.1372467,29.5625 27,29.4175415 27,29.25 C27,29.077411 27.1344109,28.9375 27.3065491,28.9375 L27.7086139,28.9375 C27.7635012,28.8426162 27.8426162,28.7635012 27.9375,28.7086139 Z M16.4375,83.7086139 L16.4375,83.3073672 C16.4375,83.137613 16.5824585,83 16.75,83 C16.922589,83 17.0625,83.1344109 17.0625,83.3065491 L17.0625,83.7086139 C17.1573838,83.7635012 17.2364988,83.8426162 17.2913861,83.9375 L17.6934509,83.9375 C17.8627533,83.9375 18,84.0824585 18,84.25 C18,84.422589 17.8655891,84.5625 17.6934509,84.5625 L17.2913861,84.5625 C17.2364988,84.6573838 17.1573838,84.7364988 17.0625,84.7913861 L17.0625,85.1934509 C17.0625,85.3627533 16.9175415,85.5 16.75,85.5 C16.577411,85.5 16.4375,85.355612 16.4375,85.1974433 L16.4375,84.7913861 C16.3426162,84.7364988 16.2635012,84.6573838 16.2086139,84.5625 L15.8065491,84.5625 C15.6372467,84.5625 15.5,84.4175415 15.5,84.25 C15.5,84.077411 15.6344109,83.9375 15.8065491,83.9375 L16.2086139,83.9375 C16.2635012,83.8426162 16.3426162,83.7635012 16.4375,83.7086139 Z M123.4375,48.2086139 L123.4375,47.8073672 C123.4375,47.637613 123.582458,47.5 123.75,47.5 C123.922589,47.5 124.0625,47.6344109 124.0625,47.8065491 L124.0625,48.2086139 C124.157384,48.2635012 124.236499,48.3426162 124.291386,48.4375 L124.693451,48.4375 C124.862753,48.4375 125,48.5824585 125,48.75 C125,48.922589 124.865589,49.0625 124.693451,49.0625 L124.291386,49.0625 C124.236499,49.1573838 124.157384,49.2364988 124.0625,49.2913861 L124.0625,49.6934509 C124.0625,49.8627533 123.917542,50 123.75,50 C123.577411,50 123.4375,49.855612 123.4375,49.6974433 L123.4375,49.2913861 C123.342616,49.2364988 123.263501,49.1573838 123.208614,49.0625 L122.806549,49.0625 C122.637247,49.0625 122.5,48.9175415 122.5,48.75 C122.5,48.577411 122.634411,48.4375 122.806549,48.4375 L123.208614,48.4375 C123.263501,48.3426162 123.342616,48.2635012 123.4375,48.2086139 Z" fill="#0061d5"></path><path class="stroke-color" d="M68.8246342,87.5 C76.40963,91.8231286 93.0935221,92.3842512 94.8471309,98.1662993 C96.6007397,103.948347 51.5,108.892186 51.5,108.892186 L56.3324509,114.952313" stroke="#0061d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path class="stroke-color" d="M109.403973,65.6681213 C121.308377,94.6323489 136.937803,71.8237566 136.937803,71.8237566" stroke="#0061d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path class="stroke-color" d="M135,69.348975 C137.383789,74.3303392 145.105602,69 145.105602,69" stroke="#0061d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path class="stroke-color" d="M81.0723406,87.5 C73.4873447,91.8231286 56.8034526,92.3842512 55.0498438,98.1662993 C53.296235,103.948347 98.3969748,108.892186 98.3969748,108.892186 L93.5645239,114.952313" stroke="#0061d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path class="stroke-color" d="M13.0621966,65.6681213 C24.9666013,94.6323489 40.5960273,71.8237566 40.5960273,71.8237566" stroke="#0061d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(26.829112, 73.012365) scale(-1, 1) translate(-26.829112, -73.012365) "></path><path class="stroke-color" d="M5,69.348975 C7.38378882,74.3303392 15.1056022,69 15.1056022,69" stroke="#0061d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(10.052801, 70.237963) scale(-1, 1) translate(-10.052801, -70.237963) "></path><path class="stroke-color fill-white" d="M35,37.9900737 C35,37.1671287 35.6677833,36.5 36.5086652,36.5 L64.7706257,36.5 C65.6038385,36.5 66.5588137,37.1050351 66.9100361,37.8652661 L70.1170158,44.806865 C70.4653667,45.5608807 70.0812601,46.1721311 69.2572363,46.1721311 L36.4905247,46.1721311 C35.6673306,46.1721311 35,45.5073264 35,44.6820574 L35,37.9900737 Z" fill="#FFFFFF" stroke="#0061d5" stroke-width="2"></path><path class="fill-color fill-opacity" d="M36.7873881,39.9245 C36.7873881,39.101555 37.4555019,38.4344262 38.2810514,38.4344262 L63.4450865,38.4344262 C64.270014,38.4344262 65.1964383,39.054175 65.5149504,39.8202068 L68.3841724,46.7207768 C68.7023992,47.4861223 68.2883944,48.1065574 67.4517556,48.1065574 L38.2960054,48.1065574 C37.462819,48.1065574 36.7873881,47.4417526 36.7873881,46.6164836 L36.7873881,39.9245 Z" fill="#0061d5" fill-opacity="0.1"></path><rect class="stroke-color fill-white" fill="#FFFFFF" height="53.1967213" rx="1.5" stroke="#0061d5" stroke-width="2" width="80" x="35" y="42.3032787"></rect><path class="fill-color fill-opacity" d="M37,81.7185235 C37,80.8915052 37.6574211,80.3784293 38.4748917,80.5333945 C38.4748917,80.5333945 42.0893396,81.8018989 62.3333333,81.8018989 C74.9176315,81.8018989 80.4976661,85.1139445 87.6666667,85.1139445 C102.165889,85.1139445 111.621106,80.7823489 111.621106,80.7823489 C112.382648,80.4723656 113,80.8978342 113,81.7185235 L113,92.0025509 C113,92.8295692 112.319761,93.5 111.498955,93.5 L38.5010449,93.5 C37.6720407,93.5 37,92.8232402 37,92.0025509 L37,81.7185235 Z" fill="#0061d5" fill-opacity="0.1"></path></g></svg>
+                                            </div>
+                                            <h5 class="heading" style="text-align: center"><span>There are no files in this project.</span></h5>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-block" id="divBlock" style="display: none;"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
