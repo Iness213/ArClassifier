@@ -16,7 +16,8 @@ import os
 from django.contrib import staticfiles
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+DATA_DIR = os.path.join(BASE_DIR, 'dataset')
+JOBLIB_DIR = os.path.join(BASE_DIR, 'dumped_models')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ArClassifier',
+    'ArClassifier'
 ]
 
 MIDDLEWARE = [

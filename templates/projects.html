@@ -27,46 +27,21 @@
                 <div class="scroll">
                     <div class="nav-border b-primary" data-nav="data-nav">
                         <ul class="nav bg">
-                            <li class="sidenavb" id="dashboardLink">
+                            <li class="sidenavb active" id="dashboardLink">
                                 <a href="{% url 'home' %}">
                                     <span class="nav-icon"> <i class="fa fa-home"></i> </span>
                                     <span class="nav-text">Dashboard</span>
                                 </a>
                             </li>
+
                             <li class="sidenavb">
-                                <a href="{% url 'datasets' %}">
-                                    <span class="nav-icon"> <i class="fa fa-folder"></i> </span>
-                                    <span class="nav-text">Datasets</span>
-                                </a>
-                            </li>
-                            <li class="sidenavb active">
                                 <a href="{% url 'projects' %}">
                                     <span class="nav-icon"> <i class="fa fa-book"></i> </span>
                                     <span class="nav-text">Projects</span>
                                 </a>
                             </li>
-                            <li class="sidenavb">
-                                <a href="{% url 'classification' %}">
-                    <span class="nav-icon">
-                      <i class="fa fa-chart-line"></i>
-                    </span>
-                                    <span class="nav-text">Classification</span>
-                                </a>
-                            </li>
-                            <li class="sidenavb">
-                                <a href="{% url 'help' %}">
-                    <span class="nav-icon">
-                      <i class="fa fa-hand-pointer"></i>
-                    </span>
-                                    <span class="nav-text">Help</span>
-                                </a>
-                            </li>
-                            <li class="sidenavb">
-                                <a href="{% url 'savedResults' %}">
-                                    <span class="nav-icon"> <i class="fa fa-save"></i> </span>
-                                    <span class="nav-text">Saved Results</span>
-                                </a>
-                            </li>
+
+
                             <li class="pb-2 hidden-folded"></li>
                         </ul>
                     </div>
@@ -84,13 +59,7 @@
                 </a>
                 <div class="navbar-text nav-title flex" id="pageTitle"></div>
 
-                <span class="white navbar-brand r-r homebuttonwrap">
-            <a href="{% url 'classification' %}">
-              <button class="btn btn-fw mr-3 d-inline text-white w-xs blue">
-                Classify
-              </button>
-            </a>
-          </span>
+
 
                 <ul class="nav flex-row order-lg-2">
                     <li class="nav-item dropdown">
