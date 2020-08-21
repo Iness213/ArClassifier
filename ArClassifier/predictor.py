@@ -20,7 +20,7 @@ encoder = LabelEncoder()
 
 def split_data():
     data = pd.read_csv(os.path.join(DATA_DIR, 'nada.csv'), encoding='utf-8')
-    data.dropna(inplace=True)
+    #data.dropna(inplace=True)
     train, test = train_test_split(data, test_size=0.2, random_state=42)
     return train, test
 
