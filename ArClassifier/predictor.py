@@ -21,7 +21,7 @@ encoder = LabelEncoder()
 def split_data():
     data = pd.read_csv(os.path.join(DATA_DIR, 'nada.csv'), encoding='utf-8')
     data.dropna(inplace=True)
-    train, test = train_test_split(data, test_size=0.2)
+    train, test = train_test_split(data, test_size=0.2, random_state=42)
     return train, test
 
 
@@ -56,7 +56,7 @@ def predict(model, count_vector, label_enc, text_to_predict):
 
 def train_naive_bayes():
     # load data
-    data, test = pre_processing()
+    data = pre_processing()
     # create model
     clfrNB = MultinomialNB(alpha=0.1)
     clfrNB.fit(data[0], data[1])
