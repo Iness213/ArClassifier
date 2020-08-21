@@ -11,14 +11,17 @@ urlpatterns = [
     path('addProject/', views.add_project, name='addProject'),
     path('deleteProject/<int:id>', views.delete_project, name='deleteProject'),
 
-    path('datasets/', views.datasets, name='datasets'),
+    path('file/<int:id>', views.file, name='file'),
     path('deleteFile/<int:id>', views.delete_file, name='deleteFile'),
-
-    path('feed_text/', views.feed_text, name='feed_text'),
+    path('dowload/<int:id>', views.download_file, name='download_file'),
+    path('feed_text/<int:id>', views.feed_text, name='feed_text'),
     path('upload_file/<int:id>', views.upload_file, name='upload_file'),
-    path('classification/', views.classification, name='classification'),
-    path('savedResults/', views.saved_results, name='savedResults'),
-    path('help/', views.help, name='help'),
+    path('preprocess_text/<int:id>', views.preprocess_text, name='preprocess_text'),
+
+
+    path('classification/<int:id>', views.classification, name='classification'),
+
+    path('result/<int:id>', views.result, name='result'),
 
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup_view, name='signup'),
