@@ -239,3 +239,10 @@ modules.xml
 vscode/
 
 files/*
+
+dataset/*
+
+dumped_models/*
+
+stanford_tagger/*
+
