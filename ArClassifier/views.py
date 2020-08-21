@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import default_storage
@@ -121,6 +123,7 @@ def feed_text(request, id):
         text = request.POST.get('text')
         user_email = request.session['user_email']
         curernt_user = MyUser.objects.filter(email__exact=user_email).first()
+        Path(BASE_DIR+'/files/'+str(curernt_user.id)).mkdir(parents=True, exist_ok=True)
         path = BASE_DIR+'/files/'+str(curernt_user.id)+'/'+name+'.txt'
         f = open(path, 'w+', encoding='UTF-8')
         f.write(text)
