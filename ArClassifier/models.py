@@ -35,15 +35,38 @@ class Dataset(models.Model):
         super(Dataset, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        os.remove(self.path)
+        if os.path.isfile(self.path):
+            os.remove(self.path)
         super(Dataset, self).delete(*args, **kwargs)
 
 
-class Keyword(models.Model):
-    word = models.CharField(max_length=255)
-    dataset = models.ForeignKey(Dataset, related_name='dataset_dataset', on_delete=models.CASCADE)
+class TrainingSet(models.Model):
+    name = models.CharField(max_length=255)
+    path = models.CharField(max_length=255)
+
+
+class Classification(models.Model):
+    training_set = models.ForeignKey(TrainingSet, related_name='classification_trainingset', on_delete=models.CASCADE)
+    file = models.ForeignKey(Dataset, related_name='file_classification', on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='project_classification', on_delete=models.CASCADE)
+    algorithm = models.CharField(max_length=255)
+    k_value = models.CharField(max_length=255)
+    creation_date = models.DateField()
+
+    def save(self, *args, **kwargs):
+        self.creation_date = datetime.now()
+        super(Classification, self).save(*args, **kwargs)
 
 
 class Result(models.Model):
     category = models.CharField(max_length=255)
-    keyword = models.ForeignKey(Keyword, related_name='keyword_keyword', on_delete=models.CASCADE)
+    accuracy = models.CharField(max_length=255)
+    recall = models.CharField(max_length=255)
+    precision = models.CharField(max_length=255)
+    f1_score = models.CharField(max_length=255)
+    classification = models.ForeignKey(Classification, related_name='result_classification', on_delete=models.CASCADE)
+
+
+class Keyword(models.Model):
+    word = models.CharField(max_length=255)
+    result = models.ForeignKey(Result, related_name='result_keyword', on_delete=models.CASCADE)
