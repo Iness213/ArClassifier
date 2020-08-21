@@ -1,5 +1,4 @@
 import os
-
 import numpy as np
 import pandas as pd
 from .Preprocessing import extractor
@@ -17,33 +16,29 @@ from Text_Classification.settings import DATA_DIR, JOBLIB_DIR
 count = CountVectorizer()
 encoder = LabelEncoder()
 
-
-def split_data():
-    data = pd.read_csv(os.path.join(DATA_DIR, 'nada.csv'), encoding='utf-8')
-    #data.dropna(inplace=True)
-    train, test = train_test_split(data, test_size=0.2, random_state=42)
-    return train, test
-
-
 def pre_processing():
-    train, test = split_data()
+    data = pd.read_csv(os.path.join(DATA_DIR, 'nada.csv'), encoding='utf-8')
+    data = data.fillna(' ')
     if not os.path.isfile(os.path.join(JOBLIB_DIR, 'count_vector.joblib')):
-        X = count.fit_transform(train['text'].values.astype('U')).toarray()
-        dump(count.fit(train['text']), os.path.join(JOBLIB_DIR, 'count_vector.joblib'))
+        X = count.fit_transform(data['text'].values.astype('U')).toarray()
+        file = os.path.join(JOBLIB_DIR, 'count_vector.joblib')
+        dump(count.fit(data['text']), open( file, "wb" ))
     else:
-        train_df_vectorized = load(os.path.join(JOBLIB_DIR, 'count_vector.joblib'))
-        X = train_df_vectorized.fit_transform(train['text'].values.astype('U')).toarray()
+        train_df_vectorized = load(open(os.path.join(JOBLIB_DIR, 'count_vector.joblib'), 'rb'))
+        X = train_df_vectorized.fit_transform(data['text'].values.astype('U')).toarray()
     if not os.path.isfile(os.path.join(JOBLIB_DIR, 'label_encoder.joblib')):
-        y = encoder.fit_transform(train['classe'])
-        dump(encoder.fit(train['classe']), os.path.join(JOBLIB_DIR, 'label_encoder.joblib'))
+        y = encoder.fit_transform(data['classe'])
+        dump(encoder.fit(data['classe']),open( os.path.join(JOBLIB_DIR, 'label_encoder.joblib'), 'wb'))
     else:
-        train_encoder = load(os.path.join(JOBLIB_DIR, 'label_encoder.joblib'))
-        y = train_encoder.fit_transform(train['classe'])
-    return [X, y]
+        train_encoder = load(open(os.path.join(JOBLIB_DIR, 'label_encoder.joblib'), 'rb'))
+        y = train_encoder.fit_transform(data['classe'])
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    return [X_train, y_train, X_test, y_test]
 
 
 def predict(model, count_vector, label_enc, text_to_predict):
-    keywords = {}
+    keywords = []
     terms = extractor(text_to_predict)
     keywords.append(terms)
     # convert to number
@@ -57,11 +52,12 @@ def predict(model, count_vector, label_enc, text_to_predict):
 def train_naive_bayes():
     # load data
     data = pre_processing()
+
     # create model
     clfrNB = MultinomialNB(alpha=0.1)
-    clfrNB.fit(data[0], data[1])
+    clfrNB.fit(data[0], data[2])
     # save model
-    dump(clfrNB, os.path.join(JOBLIB_DIR, 'NBmodel.joblib'))
+    dump(clfrNB, open(os.path.join(JOBLIB_DIR, 'NBmodel.joblib'), 'wb'))
 
 
 def predict_naive_bayes(text_to_predict):
@@ -70,9 +66,9 @@ def predict_naive_bayes(text_to_predict):
             os.path.join(JOBLIB_DIR, 'label_encoder.joblib')):
         train_naive_bayes()
 
-    loaded_model = load(os.path.join(JOBLIB_DIR, 'NBmodel.joblib'))
-    loaded_count_vector = load(os.path.join(JOBLIB_DIR, 'count_vector.joblib'))
-    loaded_label = load(os.path.join(JOBLIB_DIR, 'label_encoder.joblib'))
+    loaded_model = load(open(os.path.join(JOBLIB_DIR, 'NBmodel.joblib'), 'rb'))
+    loaded_count_vector = load(open(os.path.join(JOBLIB_DIR, 'count_vector.joblib'), 'rb'))
+    loaded_label = load(open(os.path.join(JOBLIB_DIR, 'label_encoder.joblib'), 'rb'))
 
     return predict(loaded_model, loaded_count_vector, loaded_label, text_to_predict), evaluate(loaded_model,
                                                                                                loaded_count_vector,
@@ -113,7 +109,7 @@ def predict_svm(text_to_predict):
             os.path.join(JOBLIB_DIR, 'label_encoder.joblib')):
         train_svm()
 
-    loaded_model = load(os.path.join(JOBLIB_DIR, 'SVMmodel.joblib'))
+    loaded_model = load(open(os.path.join(JOBLIB_DIR, 'SVMmodel.joblib')),'rb')
     loaded_count_vector = load(os.path.join(JOBLIB_DIR, 'count_vector.joblib'))
     loaded_label = load(os.path.join(JOBLIB_DIR, 'label_encoder.joblib'))
 
@@ -124,9 +120,9 @@ def predict_svm(text_to_predict):
 
 def evaluate(loaded_model, loaded_count_vector, loaded_label):
     metrics = {}
-    train, test = split_data()
-    y_pred = loaded_model.predict(loaded_count_vector.transform(test['text'].values.astype('U')).toarray())
-    y_test = loaded_label.transform(test['classe'])
+    data = pre_processing()
+    y_pred = loaded_model.predict(loaded_count_vector.transform(data[1]))
+    y_test = loaded_label.transform(data[3])
     # getting metrics
     metrics['accuracy'] = accuracy_score(y_test, y_pred)
     metrics['recall'] = recall_score(y_test, y_pred, average='weighted')
