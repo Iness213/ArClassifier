@@ -41,7 +41,7 @@ def index(request):
         }
         return render(request, 'dashboard.html', context)
     else:
-        redirect('login/')
+        redirect('/login/')
 
 
 @login_required(login_url='login/')
@@ -273,9 +273,10 @@ def signup_view(request):
                 user.username = user.email
                 user.save()
                 login(request, user)
+                request.session['user_email'] = user.email
                 if next:
                     return redirect(next)
-                return redirect('/')
+                return redirect('/login/')
             else:
                 i = 20
         else:
@@ -287,7 +288,7 @@ def signup_view(request):
 @login_required(login_url='login/')
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return redirect('/login/')
 
 
 def forgotpass_view(request):
