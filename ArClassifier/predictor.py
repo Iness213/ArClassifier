@@ -78,7 +78,7 @@ def predict_naive_bayes(text_to_predict):
 def train_knn():
     data = pre_processing()
     model = KNeighborsClassifier(n_neighbors=5)
-    model.fit(data[0], data[1])
+    model.fit(data[0], data[2])
     dump(model, os.path.join(JOBLIB_DIR, 'KNNmodel.joblib'))
 
 
@@ -99,7 +99,7 @@ def predict_knn(text_to_predict):
 def train_svm():
     data = pre_processing()
     Svm = svm.LinearSVC()
-    Svm.fit(data[0], data[1])
+    Svm.fit(data[0], data[2])
     dump(svm, os.path.join(JOBLIB_DIR, 'SVMmodel.joblib'))
 
 
