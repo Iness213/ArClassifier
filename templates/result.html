@@ -126,9 +126,14 @@
                                     <div class="col-lg-4"><b>Algorithm: </b>{{ classification.algorithm }}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-12">
                                         <b>Keywords: </b>
-                                        <textarea rows="15" id="corpus" name="text" class="form-control form-control-lg" disabled spellcheck="false" autocomplete="off" placeholder="">{{ keywords }}</textarea>
+                                        <textarea rows="15" fullWidth id="corpus" name="text" class="form-control form-control-lg" disabled spellcheck="false" autocomplete="off" placeholder="">
+                                            {% for keyword in keywords %}
+                                                {{ keyword.word }},
+                                            {% endfor %}
+
+                                        </textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -142,19 +147,19 @@
                                         <tbody>
                                             <tr>
                                                 <td>Accuracy</td>
-                                                <td>{{ result.accuracy }}</td>
+                                                <td>{{ metric.accuracy }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Recall</td>
-                                                <td>{{ result.recall }}</td>
+                                                <td>{{ metric.recall }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Precision</td>
-                                                <td>{{ result.precision }}</td>
+                                                <td>{{ metric.precision }}</td>
                                             </tr>
                                             <tr>
                                                 <td>F1-score</td>
-                                                <td>{{ result.f1_score }}</td>
+                                                <td>{{ metric.f1_score }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

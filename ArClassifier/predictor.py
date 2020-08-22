@@ -45,7 +45,7 @@ def train_svm(dataset_file):
     model.fit(X_train, y_train)
     dump(model, os.path.join(JOBLIB_DIR, 'SVM_model.joblib'))
 
-    svm_metric = Metric.objects.filter(name='SVM')
+    svm_metric = Metric.objects.filter(algorithm='SVM')
     if not len(svm_metric) > 0:
         # Predicting the Test set results
         y_pred = model.predict(X_test)
@@ -55,10 +55,10 @@ def train_svm(dataset_file):
                    'precision': precision_score(y_test, y_pred, average='weighted', labels=np.unique(y_pred)),
                    'f1_score': f1_score(y_test, y_pred, average='weighted', labels=np.unique(y_pred))}
         svm_metric = Metric(algorithm='SVM',
-                            accuracy=Metric['accuracy'],
-                            recall=Metric['recall'],
-                            precision=Metric['precision'],
-                            f1_score=Metric['f1_score'])
+                            accuracy=metrics.get('accuracy'),
+                            recall=metrics.get('recall'),
+                            precision=metrics.get('precision'),
+                            f1_score=metrics.get('f1_score'))
         svm_metric.save()
 
 
@@ -68,7 +68,7 @@ def train_knn(dataset_file, k):
     model.fit(X_train, y_train)
     dump(model, os.path.join(JOBLIB_DIR, 'KNN_model.joblib'))
 
-    knn_metric = Metric.objects.filter(name='KNN')
+    knn_metric = Metric.objects.filter(algorithm='KNN')
     if not len(knn_metric) > 0:
         # Predicting the Test set results
         y_pred = model.predict(X_test)
@@ -78,10 +78,10 @@ def train_knn(dataset_file, k):
                    'precision': precision_score(y_test, y_pred, average='weighted', labels=np.unique(y_pred)),
                    'f1_score': f1_score(y_test, y_pred, average='weighted', labels=np.unique(y_pred))}
         knn_metric = Metric(algorithm='KNN',
-                            accuracy=Metric['accuracy'],
-                            recall=Metric['recall'],
-                            precision=Metric['precision'],
-                            f1_score=Metric['f1_score'])
+                            accuracy=metrics.get('accuracy'),
+                            recall=metrics.get('recall'),
+                            precision=metrics.get('precision'),
+                            f1_score=metrics.get('f1_score'))
         knn_metric.save()
 
 

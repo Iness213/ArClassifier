@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from ArClassifier.form import LogInForm, SignUpForm, ForgotPassForm
-from ArClassifier.models import MyUser, Project, Dataset, Keyword, Result, Classification, TrainingSet
+from ArClassifier.models import MyUser, Project, Dataset, Keyword, Result, Classification, TrainingSet, Metric
 from Text_Classification.settings import BASE_DIR
 
 from .Preprocessing import finale_preprocess
@@ -197,6 +197,7 @@ def classification(request, id):
     project = Project.objects.get(id=id)
     datasets = TrainingSet.objects.all()
     files = Dataset.objects.filter(project_id=id)
+    classifications = Classification.objects.filter(project=project)
     algorithms = {'KNN', 'SVM', 'Naive Bayes'}
     if request.method == 'POST':
         dataset = request.POST.get('dataset')
@@ -210,11 +211,11 @@ def classification(request, id):
         algorithm = str(algorithm).replace(' ', '_')
         if algorithm == 'KNN':
             k_value = request.POST.get('k')
-            category, keywords = predict(file_content, algorithm, k_value)
+            category, keywords = predict(file_content, algorithm, 'nada.csv', k_value)
         else:
             category, keywords = predict(file_content, algorithm)
         algorithm = str(algorithm).replace('_', ' ')
-        c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm, k_value=k_value)
+        c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm)
         c.save()
         r = Result(category=category, classification=c)
         r.save()
@@ -226,7 +227,7 @@ def classification(request, id):
         'project': project,
         'datasets': datasets,
         'files': files,
-        'algorithms': algorithms
+        'algorithms': algorithms,
     }
     return render(request, 'classification.html', context)
 
@@ -235,13 +236,15 @@ def classification(request, id):
 def result(request, id):
     classification = Classification.objects.get(id=id)
     result = Result.objects.get(classification_id=classification.id)
-    keywords = Keyword.objects.get(result=result)
+    keywords = Keyword.objects.filter(result=result)
     project = classification.project
+    metric = Metric.objects.filter(algorithm=classification.algorithm).first()
     context = {
         'project': project,
         'result': result,
         'classification': classification,
-        'keywords': keywords
+        'keywords': keywords,
+        'metric': metric
     }
     return render(request, 'result.html', context)
 

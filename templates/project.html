@@ -244,7 +244,12 @@
                                                         <th scope="row">{{ classification.id }}</th>
                                                         <td>{{ classification.training_set.name }}</td>
                                                         <td>{{ classification.file.name }}</td>
-                                                        <td>{{ classification.algorithm }}</td>
+                                                        <td>
+                                                            {{ classification.algorithm }}
+                                                            {% if classification.algorithm == 'KNN' %}
+                                                                <small>(k = {{ classification.k_value }})</small>
+                                                            {% endif %}
+                                                        </td>
                                                         <td>{{ classification.creation_date }}</td>
                                                         <td>
                                                             <a href="{% url 'result' classification.id %}" style="margin: 0 10px 0 10px">

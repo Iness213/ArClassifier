@@ -50,7 +50,7 @@ class Classification(models.Model):
     file = models.ForeignKey(Dataset, related_name='file_classification', on_delete=models.CASCADE)
     project = models.ForeignKey(Project, related_name='project_classification', on_delete=models.CASCADE)
     algorithm = models.CharField(max_length=255)
-    k_value = models.CharField(max_length=255)
+    k_value = models.CharField(max_length=255, default=None, blank=True, null=True)
     creation_date = models.DateField()
 
     def save(self, *args, **kwargs):
