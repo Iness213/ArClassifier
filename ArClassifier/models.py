@@ -60,13 +60,17 @@ class Classification(models.Model):
 
 class Result(models.Model):
     category = models.CharField(max_length=255)
-    accuracy = models.CharField(max_length=255)
-    recall = models.CharField(max_length=255)
-    precision = models.CharField(max_length=255)
-    f1_score = models.CharField(max_length=255)
     classification = models.ForeignKey(Classification, related_name='result_classification', on_delete=models.CASCADE)
 
 
 class Keyword(models.Model):
     word = models.CharField(max_length=255)
     result = models.ForeignKey(Result, related_name='result_keyword', on_delete=models.CASCADE)
+
+
+class Metric(models.Model):
+    algorithm = models.CharField(max_length=255)
+    accuracy = models.CharField(max_length=255)
+    recall = models.CharField(max_length=255)
+    precision = models.CharField(max_length=255)
+    f1_score = models.CharField(max_length=255)

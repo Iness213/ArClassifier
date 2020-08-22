@@ -11,7 +11,7 @@ from ArClassifier.models import MyUser, Project, Dataset, Keyword, Result, Class
 from Text_Classification.settings import BASE_DIR
 
 from .Preprocessing import finale_preprocess
-from .predictor import predict_knn, predict_svm, predict_naive_bayes
+from .predictor import predict
 
 UserModel = get_user_model()
 
@@ -200,19 +200,27 @@ def classification(request, id):
     algorithms = {'KNN', 'SVM', 'Naive Bayes'}
     if request.method == 'POST':
         dataset = request.POST.get('dataset')
+        dataset = TrainingSet.objects.get(id=dataset)
         file_id = request.POST.get('file')
         f = Dataset.objects.get(id=file_id)
         with (open(f.path, 'r', encoding='UTF-8')) as reader:
             file_content = reader.read()
             reader.close()
         algorithm = request.POST.get('algorithm')
+        algorithm = str(algorithm).replace(' ', '_')
         if algorithm == 'KNN':
-            prediction_result, evaluation_result = predict_knn(file_content)
-        elif algorithm == 'SVM':
-            prediction_result, evaluation_result = predict_svm(file_content)
-        elif algorithm == 'Naive Bayes':
-            prediction_result, evaluation_result = predict_naive_bayes(file_content)
-        
+            k_value = request.POST.get('k')
+            category, keywords = predict(file_content, algorithm, k_value)
+        else:
+            category, keywords = predict(file_content, algorithm)
+        algorithm = str(algorithm).replace('_', ' ')
+        c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm, k_value=k_value)
+        c.save()
+        r = Result(category=category, classification=c)
+        r.save()
+        for keyword in keywords:
+            k = Keyword(word=keyword, result=r)
+            k.save()
         return redirect('/project/' + str(id))
     context = {
         'project': project,
