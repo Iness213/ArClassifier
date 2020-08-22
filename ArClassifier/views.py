@@ -208,13 +208,12 @@ def classification(request, id):
             reader.close()
         algorithm = request.POST.get('algorithm')
         algorithm = str(algorithm).replace(' ', '_')
-        if algorithm == 'KNN':
-            k_value = request.POST.get('k')
-            category, keywords = predict(file_content, algorithm, k_value)
-        else:
-            category, keywords = predict(file_content, algorithm)
+        #if algorithm == 'KNN':
+           # category, keywords = predict(file_content, algorithm)
+       # else:
+        category, keywords = predict(file_content, algorithm)
         algorithm = str(algorithm).replace('_', ' ')
-        c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm, k_value=k_value)
+        c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm, k_value=5)
         c.save()
         r = Result(category=category, classification=c)
         r.save()

@@ -45,7 +45,7 @@ def train_svm(dataset_file):
     model.fit(X_train, y_train)
     dump(model, os.path.join(JOBLIB_DIR, 'SVM_model.joblib'))
 
-    svm_metric = Metric.objects.filter(name='SVM')
+    svm_metric = Metric.objects.filter(algorithm='SVM')
     if not len(svm_metric) > 0:
         # Predicting the Test set results
         y_pred = model.predict(X_test)
@@ -68,7 +68,7 @@ def train_knn(dataset_file, k):
     model.fit(X_train, y_train)
     dump(model, os.path.join(JOBLIB_DIR, 'KNN_model.joblib'))
 
-    knn_metric = Metric.objects.filter(name='KNN')
+    knn_metric = Metric.objects.filter(algorithm='KNN')
     if not len(knn_metric) > 0:
         # Predicting the Test set results
         y_pred = model.predict(X_test)
