@@ -119,7 +119,9 @@ def finale_preprocess(text):  # returns preprocessed text without stopwords, eng
     stemmed = stemming(POS_tag)
     pos = tagger.tag(stemmed)
     preprocessed_text, stopwords = remove_stopwords(pos, stemmed)
-    return ' '.join(word for word in preprocessed_text)
+    preprocessed_text_string = ' '.join(word for word in preprocessed_text)
+    preprocessed_text_string = re.sub("[a-zA-Z]", "", preprocessed_text_string)  # remove english letters
+    return preprocessed_text_string
 
 
 def vocab_creation(processed_text):
@@ -218,6 +220,7 @@ def extractor(text):
     for k in sort.keys():
         lis = lis + str(k) + ' '
     terms = lis
+    terms = re.sub("[a-zA-Z]", " ", terms)  # remove english letters
     keys.clear()
     sort.clear()
     return terms
