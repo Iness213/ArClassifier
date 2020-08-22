@@ -11,7 +11,7 @@ from ArClassifier.models import MyUser, Project, Dataset, Keyword, Result, Class
 from Text_Classification.settings import BASE_DIR
 
 from .Preprocessing import finale_preprocess
-from .predictor import predict_knn, predict_svm, predict_naive_bayes
+from .predictor import predict
 
 UserModel = get_user_model()
 
@@ -206,12 +206,8 @@ def classification(request, id):
             file_content = reader.read()
             reader.close()
         algorithm = request.POST.get('algorithm')
-        if algorithm == 'KNN':
-            prediction_result, evaluation_result = predict_knn(file_content)
-        elif algorithm == 'SVM':
-            prediction_result, evaluation_result = predict_svm(file_content)
-        elif algorithm == 'Naive Bayes':
-            prediction_result, evaluation_result = predict_naive_bayes(file_content)
+        algorithm = str(algorithm).replace(' ', '_')
+        prediction_result, evaluation_result = predict(file_content, algorithm)
         
         return redirect('/project/' + str(id))
     context = {
