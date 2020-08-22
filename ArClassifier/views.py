@@ -200,6 +200,7 @@ def classification(request, id):
     algorithms = {'KNN', 'SVM', 'Naive Bayes'}
     if request.method == 'POST':
         dataset = request.POST.get('dataset')
+        dataset = TrainingSet.objects.get(id=dataset)
         file_id = request.POST.get('file')
         f = Dataset.objects.get(id=file_id)
         with (open(f.path, 'r', encoding='UTF-8')) as reader:
@@ -207,8 +208,19 @@ def classification(request, id):
             reader.close()
         algorithm = request.POST.get('algorithm')
         algorithm = str(algorithm).replace(' ', '_')
-        prediction_result, evaluation_result = predict(file_content, algorithm)
-        
+        if algorithm == 'KNN':
+            k_value = request.POST.get('k')
+            category, keywords = predict(file_content, algorithm, k_value)
+        else:
+            category, keywords = predict(file_content, algorithm)
+        algorithm = str(algorithm).replace('_', ' ')
+        c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm, k_value=k_value)
+        c.save()
+        r = Result(category=category, classification=c)
+        r.save()
+        for keyword in keywords:
+            k = Keyword(word=keyword, result=r)
+            k.save()
         return redirect('/project/' + str(id))
     context = {
         'project': project,
