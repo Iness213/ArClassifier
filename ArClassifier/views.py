@@ -1,7 +1,9 @@
+import json
 from pathlib import Path
 
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -51,8 +53,14 @@ def projects(request):
     user_email = request.session['user_email']
     curernt_user = MyUser.objects.filter(email__exact=user_email).first()
     user_projects_qs = Project.objects.filter(owner=curernt_user)
+    qs = user_projects_qs
+    l = []
+    for p in qs:
+        l.append(p.name)
+    u = json.dumps(l, cls=DjangoJSONEncoder)
     context = {
-        'projects': user_projects_qs
+        'projects': user_projects_qs,
+        'projects_json': u
     }
     return render(request, 'projects.html', context)
 

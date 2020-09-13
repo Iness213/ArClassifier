@@ -27,14 +27,14 @@
                 <div class="scroll">
                     <div class="nav-border b-primary" data-nav="data-nav">
                         <ul class="nav bg">
-                            <li class="sidenavb active" id="dashboardLink">
+                            <li class="sidenavb" id="dashboardLink">
                                 <a href="{% url 'home' %}">
                                     <span class="nav-icon"> <i class="fa fa-home"></i> </span>
                                     <span class="nav-text">Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="sidenavb">
+                            <li class="sidenavb active">
                                 <a href="{% url 'projects' %}">
                                     <span class="nav-icon"> <i class="fa fa-book"></i> </span>
                                     <span class="nav-text">Projects</span>
@@ -121,7 +121,16 @@
                                 <button data-toggle="modal" data-target="#addProject" class="btn btn-fw mr-3 d-inline text-white w-xs blue">Add Project</button>
                             </div>
                         </div>
+                        <br> <br> <br>
                         <div class="row">
+                            {% if projects.count == 0 %}
+                                <div class="mt-5 card col-lg-12">
+                                    <div class="img-container" style="text-align: center">
+                                        <img width="35%" src="{% static 'media/no-project.png' %}" alt="">
+                                        <h4> You have no project at this moment, add new Projects to start working.</h4>
+                                    </div>
+                                </div>
+                            {% endif %} 
                             <div class="list-group list-group-gap col-lg-12">
                                 {% for project in projects %}
                                     <div class="col-lg-12" >
@@ -189,7 +198,10 @@
                 {% csrf_token %}
             <div class="modal-body">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="name" id="name" placeholder="Project name ...">
+                    <input onkeyup="check_project_name()" class="form-control" type="text" name="name" id="name" placeholder="Project name ...">
+                    <div id="exist" class="invalid-feedback">
+                        Project with this name already exists.
+                    </div>
                 </div>
                 <div class="form-group">
                     <textarea rows="5" class="form-control" name="description" id="description" placeholder="Project description ..."></textarea>
@@ -197,7 +209,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Create project</button>
+                <button id="addProjectBtn" type="submit" class="btn btn-success">Create project</button>
             </div>
             </form>
         </div>
@@ -208,7 +220,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
-
+    function check_project_name(){
+        let projects_js = {{ projects_json | safe }};
+        let new_name= document.getElementById('name');
+        let new_name_value = new_name.value;
+        let error = document.getElementById("exist");
+        projects_js.map(project => {
+            if(project.toString() === new_name_value){
+                new_name.classList.add("is-invalid");
+                document.getElementById("addProjectBtn").disabled = true;
+                let error = document.getElementById("exist");
+                error.style.display = "block";
+            }
+            else{
+                new_name.classList.remove("is-invalid");
+                document.getElementById("addProjectBtn").disabled = false;
+                error.style.display = "none";
+            }
+        });
+    }
     $('#deleteProject').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget) // Button that triggered the modal
         var recipient = target.data('whatever') // Extract info from data-* attributes
