@@ -51,6 +51,7 @@ class Classification(models.Model):
     project = models.ForeignKey(Project, related_name='project_classification', on_delete=models.CASCADE)
     algorithm = models.CharField(max_length=255)
     k_value = models.CharField(max_length=255, default=None, blank=True, null=True)
+    type = models.CharField(max_length=255, default="Classification")
     creation_date = models.DateField()
 
     def save(self, *args, **kwargs):

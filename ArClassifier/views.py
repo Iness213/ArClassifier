@@ -175,7 +175,7 @@ def delete_file(request, id):
 def download_file(request, id):
     file = Dataset.objects.get(id=id)
     path = file.path
-    with(open(path, 'r')) as reader:
+    with(open(path, 'r', encoding="UTF-8")) as reader:
         file_content = reader.read()
         response = HttpResponse(file_content, content_type='application/octet-stream')
         response['Content-Disposition'] = 'attachment; filename=' + file.name
@@ -201,6 +201,12 @@ def preprocess_text(request, id):
 
 
 @login_required(login_url='login/')
+def sentiment(request, id):
+    context = {}
+    return render(request, 'classification.html', context)
+
+
+@login_required(login_url='login/')
 def classification(request, id):
     project = Project.objects.get(id=id)
     datasets = TrainingSet.objects.all()
@@ -208,7 +214,7 @@ def classification(request, id):
     classifications = Classification.objects.filter(project=project)
     algorithms = {'KNN', 'SVM', 'Naive Bayes'}
     if request.method == 'POST':
-        dataset = request.POST.get('dataset')
+        dataset = 1
         dataset = TrainingSet.objects.get(id=dataset)
         file_id = request.POST.get('file')
         f = Dataset.objects.get(id=file_id)

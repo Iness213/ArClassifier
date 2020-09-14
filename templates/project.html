@@ -27,14 +27,14 @@
                 <div class="scroll">
                     <div class="nav-border b-primary" data-nav="data-nav">
                         <ul class="nav bg">
-                            <li class="sidenavb active" id="dashboardLink">
+                            <li class="sidenavb" id="dashboardLink">
                                 <a href="{% url 'home' %}">
                                     <span class="nav-icon"> <i class="fa fa-home"></i> </span>
                                     <span class="nav-text">Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="sidenavb">
+                            <li class="sidenavb active">
                                 <a href="{% url 'projects' %}">
                                     <span class="nav-icon"> <i class="fa fa-book"></i> </span>
                                     <span class="nav-text">Projects</span>
@@ -219,6 +219,10 @@
                                             <a href="{% url 'classification' project.id %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
                                                 <i class="fa fa-wrench"></i> New Classification
                                             </button></a>
+
+                                            <a href="{% url 'sentiment' project.id %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+                                                <i class="fa fa-wrench"></i> Sentiment Analysis
+                                            </button></a>
                                         </div>
 
                                     </div>
@@ -230,7 +234,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Dataset</th>
+                                                    <th scope="col">Type</th>
                                                     <th scope="col">File</th>
                                                     <th scope="col">Algorithm</th>
                                                     <th scope="col">Creation date</th>
@@ -242,7 +246,7 @@
                                                     <tr>
 
                                                         <th scope="row">{{ classification.id }}</th>
-                                                        <td>{{ classification.training_set.name }}</td>
+                                                        <td>{{ classification.type }}</td>
                                                         <td>{{ classification.file.name }}</td>
                                                         <td>
                                                             {{ classification.algorithm }}

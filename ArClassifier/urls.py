@@ -20,6 +20,7 @@ urlpatterns = [
 
 
     path('classification/<int:id>', views.classification, name='classification'),
+    path('sentiment/<int:id>', views.sentiment, name='sentiment'),
 
     path('result/<int:id>', views.result, name='result'),
 
