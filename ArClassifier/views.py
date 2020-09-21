@@ -28,22 +28,15 @@ def index(request):
         user_projects_qs = Project.objects.filter(owner=curernt_user)
         number_of_datasets = 0
         number_of_saved_results = 0
-        number_of_keywords = 0
         for project in user_projects_qs:
             project_datasets_qs = Dataset.objects.filter(project=project)
             number_of_datasets = number_of_datasets + len(project_datasets_qs)
             project_classification_qs = Classification.objects.filter(project=project)
-            for classification in project_classification_qs:
-                classification_result_qs = Result.objects.filter(classification=classification)
-                number_of_saved_results = number_of_saved_results + len(classification_result_qs)
-                for result in classification_result_qs:
-                    keyword_project = Keyword.objects.filter(result=result)
-                    number_of_keywords = number_of_keywords + len(keyword_project)
+            number_of_saved_results = number_of_saved_results + len(project_classification_qs)
 
         context = {
             'number_of_datasets': number_of_datasets,
             'number_of_saved_results': number_of_saved_results,
-            'number_of_keywords': number_of_keywords,
         }
         return render(request, 'dashboard.html', context)
     else:
@@ -251,7 +244,10 @@ def classification(request, id):
         else:
             category, keywords = predict(file_content, algorithm, current_user.id, file_name)
         algorithm = str(algorithm).replace('_', ' ')
-        c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm)
+        if algorithm == 'KNN':
+            c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm, k_value=5)
+        else:
+            c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm)
         c.save()
         r = Result(category=category, classification=c)
         r.save()
