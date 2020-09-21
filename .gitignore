@@ -237,9 +237,9 @@ modules.xml
 .vscode
 vscode/
 
-files/*
 
-dataset/*
+
+
 
 dumped_models/*
 

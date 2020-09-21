@@ -1,0 +1,2 @@
+rkgnsjsnjnskjgdk;sjgk;sjgkjn
+BASE_DIR+'/files/'+str(curernt_user.id)
