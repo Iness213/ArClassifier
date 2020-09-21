@@ -1,6 +1,9 @@
 import os
 import numpy as np
 import pandas as pd
+from arabic_reshaper import arabic_reshaper
+from bidi.algorithm import get_display
+
 from .Preprocessing import extractor
 from joblib import dump, load
 from sklearn import svm
@@ -10,8 +13,10 @@ from sklearn.model_selection import train_test_split  # for splitting data
 from sklearn.naive_bayes import MultinomialNB  # to bulid classifier model
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder  # to convert classes to number
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
-from Text_Classification.settings import DATA_DIR, JOBLIB_DIR
+from Text_Classification.settings import DATA_DIR, JOBLIB_DIR, BASE_DIR
 from .models import Metric
 
 count = CountVectorizer()
@@ -108,7 +113,8 @@ def train_naive_bayes(dataset_file):
         nb_metric.save()
 
 
-def predict(text_to_predict, algorithm, dataset_file='nada.csv', k=5):
+def predict(text_to_predict, algorithm, user_id, file_name, dataset_file='nada.csv', k=5):
+    k = 5
     if not os.path.isfile(os.path.join(JOBLIB_DIR, algorithm + '_model.joblib')) or not os.path.isfile(os.path.join(
             JOBLIB_DIR, 'encoder.joblib')) or not os.path.isfile(os.path.join(JOBLIB_DIR, 'count_vector.joblib')):
         if algorithm == 'SVM':
@@ -122,7 +128,7 @@ def predict(text_to_predict, algorithm, dataset_file='nada.csv', k=5):
     encoder_vector = load(os.path.join(JOBLIB_DIR, 'encoder.joblib'))
     count_vector = load(os.path.join(JOBLIB_DIR, 'count_vector.joblib'))
 
-    terms = extractor(text_to_predict)
+    terms = extractor(text_to_predict, user_id, file_name)
     keywords = [terms]
 
     # convert to number
@@ -132,3 +138,25 @@ def predict(text_to_predict, algorithm, dataset_file='nada.csv', k=5):
     category = encoder_vector.inverse_transform(model.predict(test_vector))
 
     return category[0], keywords
+
+
+def word_cloud(keywords, result_id):
+    if not os.path.isdir(os.path.join(BASE_DIR, 'static/media/wordCloud')):
+        os.mkdir(os.path.join(BASE_DIR, 'static/media/wordCloud'))
+        return create_word_cloud(keywords, result_id)
+    elif not os.path.isfile(os.path.join(BASE_DIR, 'static/media/wordCloud/'+str(result_id)+'.png')):
+        return create_word_cloud(keywords, result_id)
+    return os.path.join('wordCloud', str(result_id)+'.png')
+
+
+def create_word_cloud(keywords, result_id):
+    data = arabic_reshaper.reshape(keywords)
+    data = get_display(data)  # add this line
+    wordCloud = WordCloud(font_path='arial', background_color='white',mode='RGB', width=2000, height=1000).generate(data)
+    plt.imshow(wordCloud)
+    plt.axis("off")
+    plt.tight_layout()
+    plt.savefig(os.path.join(BASE_DIR, 'static/media/wordCloud/'+str(result_id)+'.png'))
+    plt.show()
+    img_path = os.path.join('wordCloud', str(result_id)+'.png')
+    return img_path

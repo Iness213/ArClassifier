@@ -49,7 +49,7 @@ class Classification(models.Model):
     training_set = models.ForeignKey(TrainingSet, related_name='classification_trainingset', on_delete=models.CASCADE)
     file = models.ForeignKey(Dataset, related_name='file_classification', on_delete=models.CASCADE)
     project = models.ForeignKey(Project, related_name='project_classification', on_delete=models.CASCADE)
-    algorithm = models.CharField(max_length=255)
+    algorithm = models.CharField(max_length=255, default="SVM + KNN + Naive Bayes")
     k_value = models.CharField(max_length=255, default=None, blank=True, null=True)
     type = models.CharField(max_length=255, default="Classification")
     creation_date = models.DateField()

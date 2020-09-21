@@ -1,6 +1,7 @@
 import json
+import os
 from pathlib import Path
-
+import ntpath
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
@@ -13,7 +14,8 @@ from ArClassifier.models import MyUser, Project, Dataset, Keyword, Result, Class
 from Text_Classification.settings import BASE_DIR
 
 from .Preprocessing import finale_preprocess
-from .predictor import predict
+from .SAprediction import predict_naive_bayes
+from .predictor import predict, word_cloud
 
 UserModel = get_user_model()
 
@@ -135,8 +137,8 @@ def feed_text(request, id):
         path = BASE_DIR+'/files/'+str(curernt_user.id)+'/'+name+'.txt'
         f = open(path, 'w+', encoding='UTF-8')
         f.write(text)
-        file = Dataset(name=name+'.txt', project=project, path=path)
-        file.save()
+        d = Dataset(name=name+'.txt', project=project, path=path)
+        d.save()
         return redirect('/project/' + str(id))
 
     context = {
@@ -202,8 +204,24 @@ def preprocess_text(request, id):
 
 @login_required(login_url='login/')
 def sentiment(request, id):
-    context = {}
-    return render(request, 'classification.html', context)
+    project = Project.objects.get(id=id)
+    files = Dataset.objects.filter(project_id=id)
+    if request.method == 'POST':
+        dataset = TrainingSet.objects.get(id=2)
+        file_id = request.POST.get('file')
+        f = Dataset.objects.get(id=file_id)
+        with (open(f.path, 'r', encoding='UTF-8')) as reader:
+            file_content = reader.read()
+            reader.close()
+        prediction_class = predict_naive_bayes(file_content)
+        c = Classification(training_set=dataset, file=f, project=project, type=prediction_class)
+        c.save()
+        return redirect('/project/' + str(id))
+    context = {
+        'project': project,
+        'files': files,
+    }
+    return render(request, 'sentiment.html', context)
 
 
 @login_required(login_url='login/')
@@ -214,6 +232,8 @@ def classification(request, id):
     classifications = Classification.objects.filter(project=project)
     algorithms = {'KNN', 'SVM', 'Naive Bayes'}
     if request.method == 'POST':
+        user_email = request.session['user_email']
+        current_user = MyUser.objects.filter(email__exact=user_email).first()
         dataset = 1
         dataset = TrainingSet.objects.get(id=dataset)
         file_id = request.POST.get('file')
@@ -223,11 +243,13 @@ def classification(request, id):
             reader.close()
         algorithm = request.POST.get('algorithm')
         algorithm = str(algorithm).replace(' ', '_')
+        file_name = ntpath.basename(f.path)
+        file_name = file_name.split('.')[0]+'.png'
         if algorithm == 'KNN':
-            k_value = request.POST.get('k')
-            category, keywords = predict(file_content, algorithm, 'nada.csv', k_value)
+            k_value = 5
+            category, keywords = predict(file_content, algorithm, current_user.id, file_name, 'nada.csv', k_value)
         else:
-            category, keywords = predict(file_content, algorithm)
+            category, keywords = predict(file_content, algorithm, current_user.id, file_name)
         algorithm = str(algorithm).replace('_', ' ')
         c = Classification(training_set=dataset, file=f, project=project, algorithm=algorithm)
         c.save()
@@ -236,7 +258,7 @@ def classification(request, id):
         for keyword in keywords:
             k = Keyword(word=keyword, result=r)
             k.save()
-        return redirect('/project/' + str(id))
+        return redirect('/result/' + str(c.id))
     context = {
         'project': project,
         'datasets': datasets,
@@ -249,17 +271,37 @@ def classification(request, id):
 @login_required(login_url='login/')
 def result(request, id):
     classification = Classification.objects.get(id=id)
+    user_email = request.session['user_email']
+    current_user = MyUser.objects.filter(email__exact=user_email).first()
+    f = classification.file.path
+    file_name = ntpath.basename(f)
+    file_name = file_name.split('.')[0]+'.png'
+    image_src = os.path.join(os.path.join('graph', str(current_user.id)), file_name)
+
     result = Result.objects.get(classification_id=classification.id)
-    keywords = Keyword.objects.filter(result=result)
+    keywords = Keyword.objects.filter(result=result).first()
     project = classification.project
     metric = Metric.objects.filter(algorithm=classification.algorithm).first()
-    context = {
-        'project': project,
-        'result': result,
-        'classification': classification,
-        'keywords': keywords,
-        'metric': metric
-    }
+    word_cloud_src = word_cloud(keywords.word, result.id)
+    if word_cloud_src is not None:
+        context = {
+            'project': project,
+            'result': result,
+            'classification': classification,
+            'keywords': keywords,
+            'metric': metric,
+            'image_src': image_src,
+            'word_cloud_src': word_cloud_src
+        }
+    else:
+        context = {
+            'project': project,
+            'result': result,
+            'classification': classification,
+            'keywords': keywords,
+            'metric': metric,
+            'image_src': image_src
+        }
     return render(request, 'result.html', context)
 
 

@@ -6,8 +6,12 @@ import string
 
 import nltk
 import numpy as np
+import networkx as nx
+from arabic_reshaper import arabic_reshaper
+from bidi.algorithm import get_display
 from nltk.tag import pos_tag
 from pyarabic.araby import tokenize
+import matplotlib.pyplot as plt
 
 from Text_Classification.settings import BASE_DIR
 
@@ -134,7 +138,7 @@ def build_graph(processed_text, vocabulary, window_size=3):
 
     weighted_edge = np.zeros((vocab_len, vocab_len), dtype=np.float32)
 
-    score = np.zeros((vocab_len), dtype=np.float32)
+    score = np.zeros(vocab_len, dtype=np.float32)
     window_size = 3
     covered_coocurrences = []
 
@@ -167,7 +171,7 @@ def build_graph(processed_text, vocabulary, window_size=3):
 
 def summation(vocabulary, weighted_edge):
     vocab_len = len(vocabulary)
-    inout = np.zeros((vocab_len), dtype=np.float32)
+    inout = np.zeros(vocab_len, dtype=np.float32)
 
     for i in range(0, vocab_len):
         for j in range(0, vocab_len):
@@ -190,7 +194,7 @@ def scores(inout, weighted_edge, vocabulary, score):
                 if weighted_edge[i][j] != 0:
                     summation += (weighted_edge[i][j] / inout[j]) * score[j]
 
-            score[i] = (1 - d) + d * (summation)
+            score[i] = (1 - d) + d * summation
 
         if np.sum(np.fabs(prev_score - score)) <= threshold:  # convergence condition
             print("Converging at iteration " + str(iter) + "....")
@@ -198,7 +202,7 @@ def scores(inout, weighted_edge, vocabulary, score):
     return score
 
 
-def extractor(text):
+def extractor(text, user_id, file_name):
     keys = {}
     tagger = make_tagger()
     text = clean_text(text)
@@ -220,7 +224,45 @@ def extractor(text):
     for k in sort.keys():
         lis = lis + str(k) + ' '
     terms = lis
-    terms = re.sub("[a-zA-Z]", " ", terms)  # remove english letters
+    terms = re.sub("[a-zA-Z]", "", terms)  # remove english letters
     keys.clear()
     sort.clear()
+    edges_list = edges(weighted_edge, vocabulary)
+    draw_graph(edges_list, user_id, file_name)
     return terms
+
+
+def edges(A, vocab):
+    edges = []
+    for i in range(len(A)):
+        for j in range(i + 1, len(A[0])):
+            if A[i][j] > 0:
+                edges.append((vocab[i], vocab[j]))
+    return edges
+
+
+def draw_graph(edgeList, user_id, file_name):
+    lis = []
+    for i in edgeList:
+        reshaped_text = arabic_reshaper.reshape(i[0])
+        artext = get_display(reshaped_text)
+        reshaped_text1 = arabic_reshaper.reshape(i[1])
+        artext1 = get_display(reshaped_text1)
+        lis.append((artext, artext1))
+    G = nx.OrderedMultiDiGraph()
+    G.add_edges_from(lis)
+    pos = nx.spring_layout(G, k=0.85, iterations=10)
+    nx.draw_networkx_nodes(G, pos, node_color='#AED6F1', node_size=2500)
+    nx.draw_networkx_labels(G, pos)
+    nx.draw_networkx_edges(G, pos, edgelist=G.edges(), edge_color='#95A5A6', arrows=True)
+    nx.draw_networkx_labels(G, pos, font_size=20, font_family='Times New Roman')
+    graph_path = os.path.join(os.path.join(BASE_DIR, 'static/media'), 'graph')
+    user_path = os.path.join(graph_path, str(user_id))
+    if not os.path.isdir(graph_path):
+        os.mkdir(graph_path)
+    if not os.path.isdir(user_path):
+        os.mkdir(user_path)
+    path = os.path.join(user_path, file_name)
+    plt.tight_layout()
+    plt.savefig(path, format="PNG")
+    plt.show()

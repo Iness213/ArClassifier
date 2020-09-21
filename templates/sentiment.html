@@ -27,7 +27,7 @@
                 <div class="scroll">
                     <div class="nav-border b-primary" data-nav="data-nav">
                         <ul class="nav bg">
-                            <li class="sidenavb " id="dashboardLink">
+                            <li class="sidenavb" id="dashboardLink">
                                 <a href="{% url 'home' %}">
                                     <span class="nav-icon"> <i class="fa fa-home"></i> </span>
                                     <span class="nav-text">Dashboard</span>
@@ -117,59 +117,26 @@
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-header">
-                                <h2><a href="{% url 'project' project.id %}">{{ project.name }}</a> > Classification</h2>
+                                <h2><a href="{% url 'project' project.id %}">{{ project.name }}</a> > Sentiment Analysis</h2>
                             </div>
                             <div class="box-body">
-                                <div class="row">
-                                    <div class="col-lg-6" style="text-align: center;">
-                                        {% with 'media/'|add:word_cloud_src as word_cloud_src %}
-                                            <img width="70%" src="{% static word_cloud_src %}">
-                                        {% endwith %}
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="row">
-                                            <div class="col-lg-12"><b>Category: </b>{{ result.category }}</div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>Metric</th>
-                                                    <th>Value</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>Accuracy</td>
-                                                    <td>{{ metric.accuracy }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Recall</td>
-                                                    <td>{{ metric.recall }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Precision</td>
-                                                    <td>{{ metric.precision }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>F1-score</td>
-                                                    <td>{{ metric.f1_score }}</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12" style="text-align: center">
-                                        {% with 'media/'|add:image_src as image_src %}
-                                            <img width="70%" src="{% static image_src %}">
-                                        {% endwith %}
+                                <form method="post">
+                                    {% csrf_token %}
+
+                                    <div class="form-group">
+                                        <select name="file" class="form-control">
+                                            <option selected disabled>Select a file</option>
+                                            {% for file in files %}
+                                                <option value="{{ file.id }}">{{ file.name }}</option>
+                                            {% endfor %}
+                                        </select>
                                     </div>
 
-                                </div>
+                                    <div class="col-lg-12">
+                                        <button class="btn btn-fw text-white w blue" type="submit">Classify</button>
+                                    </div>
 
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -182,6 +149,5 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </body>
 </html>

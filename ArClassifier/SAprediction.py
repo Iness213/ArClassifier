@@ -19,7 +19,7 @@ def pre_processing():
     train = pd.read_csv(os.path.join(DATA_DIR, 'balanced_2classes_train.csv'), encoding='utf-8')
     val = pd.read_csv(os.path.join(DATA_DIR, 'balanced_2classes_val.csv'), encoding='utf-8')
     test = pd.read_csv(os.path.join(DATA_DIR, 'balanced_2classes_test.csv'), encoding='utf-8')
-    stops = pd.read_excel(os.path.join(DATA_DIR, 'ar_stops.xlsx'), encoding='utf-8')
+    stops = pd.read_excel(os.path.join(DATA_DIR, 'ar_stops.xlsx'))
     frames = [train, val, test]
 
     data = pd.concat(frames)
@@ -47,6 +47,7 @@ def pre_processing():
 
 
 def predict(model, count_vector, text_to_predict):
+    text_to_predict = [text_to_predict]
     prediction = count_vector.transform(text_to_predict)
     p = model.predict(prediction)[0]
     if p == 0:
@@ -60,7 +61,7 @@ def predict(model, count_vector, text_to_predict):
 def train_naive_bayes():
 
     data = pre_processing()
-    clfr = VotingClassifier(estimators=[('mnb', MultinomialNB(alpha=0.1)), ('knn', KNeighborsClassifier(n_neighbors=5)), ('svm', SVC(kernel='linear'))],voting = 'soft', weights = [2, 1, 1])
+    clfr = VotingClassifier(estimators=[('mnb', MultinomialNB(alpha=0.1)), ('knn', KNeighborsClassifier(n_neighbors=5)), ('svm', SVC(kernel='linear', probability=True))], voting='soft', weights=[2, 1, 1])
 
     clfr.fit(data[0], data[1])
 
