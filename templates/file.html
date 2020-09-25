@@ -35,9 +35,23 @@
                             </li>
 
                             <li class="sidenavb active">
-                                <a href="{% url 'projects' %}">
+                                <a href="{% url 'library' %}">
                                     <span class="nav-icon"> <i class="fa fa-book"></i> </span>
-                                    <span class="nav-text">Projects</span>
+                                    <span class="nav-text">Library</span>
+                                </a>
+                            </li>
+
+                            <li class="sidenavb">
+                                <a href="{% url 'classification_project' %}">
+                                    <span class="nav-icon"> <i class="fa fa-chart-line"></i> </span>
+                                    <span class="nav-text">Classification</span>
+                                </a>
+                            </li>
+
+                            <li class="sidenavb">
+                                <a href="{% url 'snetiment_analysis_project' %}">
+                                    <span class="nav-icon"> <i class="fa fa-balance-scale"></i> </span>
+                                    <span class="nav-text">Sentiment Analysis</span>
                                 </a>
                             </li>
 
@@ -117,7 +131,7 @@
                     <div class="col-lg-12">
                         <div class="box fadeIn animated">
                             <div class="box-header">
-                                <h2><a href="{% url 'project' project_id %}">{{ project_name }}</a> > {{ file_name }}</h2>
+                                <h2>File: {{ file_name }}</h2>
                             </div>
 
                             <div class="box-divider m-0"></div>

@@ -35,9 +35,23 @@
                             </li>
 
                             <li class="sidenavb">
-                                <a href="{% url 'projects' %}">
+                                <a href="{% url 'library' %}">
                                     <span class="nav-icon"> <i class="fa fa-book"></i> </span>
-                                    <span class="nav-text">Projects</span>
+                                    <span class="nav-text">Library</span>
+                                </a>
+                            </li>
+
+                            <li class="sidenavb">
+                                <a href="{% url 'classification_project' %}">
+                                    <span class="nav-icon"> <i class="fa fa-chart-line"></i> </span>
+                                    <span class="nav-text">Classification</span>
+                                </a>
+                            </li>
+
+                            <li class="sidenavb">
+                                <a href="{% url 'snetiment_analysis_project' %}">
+                                    <span class="nav-icon"> <i class="fa fa-balance-scale"></i> </span>
+                                    <span class="nav-text">Sentiment Analysis</span>
                                 </a>
                             </li>
 

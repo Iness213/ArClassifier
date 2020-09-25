@@ -37,9 +37,23 @@
                             </li>
 
                             <li class="sidenavb active">
-                                <a href="{% url 'projects' %}">
+                                <a href="{% url 'library' %}">
                                     <span class="nav-icon"> <i class="fa fa-book"></i> </span>
-                                    <span class="nav-text">Projects</span>
+                                    <span class="nav-text">Library</span>
+                                </a>
+                            </li>
+
+                            <li class="sidenavb">
+                                <a href="{% url 'classification_project' %}">
+                                    <span class="nav-icon"> <i class="fa fa-chart-line"></i> </span>
+                                    <span class="nav-text">Classification</span>
+                                </a>
+                            </li>
+
+                            <li class="sidenavb">
+                                <a href="{% url 'snetiment_analysis_project' %}">
+                                    <span class="nav-icon"> <i class="fa fa-balance-scale"></i> </span>
+                                    <span class="nav-text">Sentiment Analysis</span>
                                 </a>
                             </li>
 
@@ -119,7 +133,7 @@
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-header">
-                                <h2><a href="{% url 'project' projectId %}">project_name</a>/ File Upload</h2>
+                                <h2>Upload Multiple Files</h2>
                                 <small>Drag and Drop multiple files for use in your project.</small>
                             </div>
                             <div class="box-divider m-0"></div>

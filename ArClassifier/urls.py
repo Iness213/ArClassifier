@@ -17,10 +17,16 @@ urlpatterns = [
     path('feed_text/<int:id>', views.feed_text, name='feed_text'),
     path('upload_file/<int:id>', views.upload_file, name='upload_file'),
     path('preprocess_text/<int:id>', views.preprocess_text, name='preprocess_text'),
+    path('graph/<int:id>', views.graph, name='graph'),
+    path('graph_json/<int:id>', views.graph_json, name='graph_json'),
 
 
     path('classification/<int:id>', views.classification, name='classification'),
     path('sentiment/<int:id>', views.sentiment, name='sentiment'),
+
+    path('library', views.library_view, name='library'),
+    path('classification', views.clasification_projects_view, name='classification_project'),
+    path('sentiment', views.sentiment_analysis_projects_view, name='snetiment_analysis_project'),
 
     path('result/<int:id>', views.result, name='result'),
 

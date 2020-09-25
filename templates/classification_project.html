@@ -50,11 +50,10 @@
 
                             <li class="sidenavb">
                                 <a href="{% url 'snetiment_analysis_project' %}">
-                                    <span class="nav-icon"> <i class="fa fa-balance-scale"></i> </span>
+                                    <span class="nav-icon"><i class="fa fa-balance-scale"></i></span>
                                     <span class="nav-text">Sentiment Analysis</span>
                                 </a>
                             </li>
-
 
                             <li class="pb-2 hidden-folded"></li>
                         </ul>
@@ -87,13 +86,6 @@
 
                                 </div>
                             </div>
-                            <div class="d-flex px-3 py-2 b-t">
-                                <div class="flex">
-                                    <span>0 Notifications</span>
-                                </div>
-                                <a href="setting.html">See all <i class="fa fa-angle-right text-muted"></i>
-                                </a>
-                            </div>
                         </div>
                     </li>
                     <li class="dropdown d-flex align-items-center">
@@ -103,15 +95,9 @@
                 </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right w pt-0 mt-2 animate fadeIn">
-                            <a class="dropdown-item" href="/account">
-                                <span>Account</span>
-                            </a>
-                            <a class="dropdown-item" href="/lists">
-                                <span>Manage Lists</span>
-                            </a>
-                            <div class="dropdown-divider" id="userMenu"></div>
-                            <a class="dropdown-item helpLink" href="/help"> Need help? </a>
-                            <a class="dropdown-item logoutd" href="#">Sign out</a>
+
+                            <a class="dropdown-item helpLink" href="#"> Need help? </a>
+                            <a class="dropdown-item logoutd" href="{% url 'logout' %}">Sign out</a>
                         </div>
                     </li>
                     <li class="d-lg-none d-flex align-items-center">
@@ -129,46 +115,86 @@
             <div class="padding">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="box">
-                            <div class="box-header">
-                                <h2>New Classification</h2>
-                            </div>
-                            <div class="box-body">
-                                <form method="post">
-                                    {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box fadeIn animated">
+                                    <div class="box-header">
+                                        <h2>Classifications</h2>
+                                        <div class="ml-auto">
+                                            <a href="{% url 'classification' project.id %}"><button class="btn btn-fw mr-3 d-inline text-white w blue mt-2">
+                                                <i class="fa fa-wrench"></i> New Classification
+                                            </button></a>
+                                        </div>
 
-                                    <div class="form-group">
-                                        <select name="file" class="form-control">
-                                            <option selected disabled>Select a file</option>
-                                            {% for file in files %}
-                                                <option value="{{ file.id }}">{{ file.name }}</option>
-                                            {% endfor %}
-                                        </select>
                                     </div>
-                                    <div class="form-group">
-                                        <select id="algorithm" name="algorithm" class="form-control">
-                                            <option selected disabled>Select an algorithm</option>
-                                            {% for algorithm in algorithms %}
-                                                <option value="{{ algorithm }}">{{ algorithm }}</option>
-                                            {% endfor %}
-                                        </select>
+                                    <div class="box-divider m-0"></div>
+
+                                    <div class="box-body">
+                                        {% if hasClassification %}
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">File</th>
+                                                    <th scope="col">Algorithm</th>
+                                                    <th scope="col">Creation date</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for classification in classifications %}
+                                                    <tr>
+
+                                                        <th scope="row">{{ classification.id }}</th>
+                                                        <td>{{ classification.file.name }}</td>
+                                                        <td>
+                                                            {{ classification.algorithm }}
+                                                            {% if classification.algorithm == 'KNN' %}
+                                                                <small>(k = 5)</small>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>{{ classification.creation_date }}</td>
+                                                        <td>
+                                                            <a href="{% url 'result' classification.id %}" style="margin: 0 10px 0 10px" data-toggle="tooltip" title="Show Results">
+                                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"></path>
+                                                                    <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zm4.354 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"></path>
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                        </a>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        {% else %}
+                                            <div style="text-align: center;">
+                                                <img height="252" viewBox="0 0 150 150" width="auto" src="{% static 'media/class.png' %}"/>
+                                            </div>
+                                            <h5 class="heading" style="text-align: center"><span>You have not started a classification yet.</span></h5>
+                                        {% endif %}
                                     </div>
-                                <div class="col-lg-12">
-                                    <button class="btn btn-fw text-white w blue" type="submit">Classify</button>
                                 </div>
-
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+
+                </div>
             </div>
         </div>
     </div>
+    <div class="main-block" id="divBlock" style="display: none;"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 </body>
 </html>

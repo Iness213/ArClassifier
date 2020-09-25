@@ -1,3 +1,4 @@
+import json
 import math
 import operator
 import os
@@ -9,6 +10,8 @@ import numpy as np
 import networkx as nx
 from arabic_reshaper import arabic_reshaper
 from bidi.algorithm import get_display
+from networkx.readwrite import json_graph
+from nltk.corpus import stopwords
 from nltk.tag import pos_tag
 from pyarabic.araby import tokenize
 import matplotlib.pyplot as plt
@@ -251,9 +254,8 @@ def draw_graph(edgeList, user_id, file_name):
         lis.append((artext, artext1))
     G = nx.OrderedMultiDiGraph()
     G.add_edges_from(lis)
-    pos = nx.spring_layout(G, k=0.85, iterations=10)
+    pos = nx.spring_layout(G, k=0.99, iterations=50)
     nx.draw_networkx_nodes(G, pos, node_color='#AED6F1', node_size=2500)
-    nx.draw_networkx_labels(G, pos)
     nx.draw_networkx_edges(G, pos, edgelist=G.edges(), edge_color='#95A5A6', arrows=True)
     nx.draw_networkx_labels(G, pos, font_size=20, font_family='Times New Roman')
     graph_path = os.path.join(os.path.join(BASE_DIR, 'static/media'), 'graph')
@@ -264,5 +266,69 @@ def draw_graph(edgeList, user_id, file_name):
         os.mkdir(user_path)
     path = os.path.join(user_path, file_name)
     plt.tight_layout()
-    plt.savefig(path, format="PNG")
+    plt.savefig(path+'.png', format="PNG")
     plt.show()
+
+
+def extractorbefore(text, user_id, file_name):
+    names = file_name.split('.')
+    name = names[0]
+    keys = {}
+    # remove english letters
+    text = re.sub("[a-zA-Z]", " ", str(text))
+    # remove \n from text
+    text = re.sub('\n', ' ', text)
+    # remove number
+    text = re.sub(r'\d+', '', text)
+    # remove links
+    text = re.sub(r'http\S+', '', text)
+    # remove punctuation
+    text = text.translate(str.maketrans('', '', punctuations_list))
+    # remove stop word
+    text = ' '.join([word for word in text.split() if word not in stopwords.words("arabic")])
+    # remove extra space
+    text = re.sub(' +', ' ', text)
+    # remove whitespaces
+    text = text.strip()
+    text = text.split()
+    vocabulary = vocab_creation(text)
+    weighted_edge, score = build_graph(text, vocabulary)
+    inout = summation(vocabulary, weighted_edge)
+    scor = scores(inout, weighted_edge, vocabulary, score)
+    for i in range(0, len(vocabulary)):
+        sc = str(scor[i])
+        word = vocabulary[i]
+        keys[word] = sc
+    sort = dict(sorted(keys.items(), key=operator.itemgetter(1), reverse=True)[:20])
+    lis = ''
+    for k in sort.keys():
+        lis = lis + str(k) + ' '
+    terms = lis
+    terms = re.sub("[a-zA-Z]", "", terms)  # remove english letters
+    keys.clear()
+    sort.clear()
+    edges_list = edges(weighted_edge, vocabulary)
+    draw_graph(edges_list, user_id, 'before-'+name)
+
+    return terms
+
+
+def preprocess_step1(text):
+    text = clean_text(text)
+    token = tokenize(text)
+    return token
+
+
+def preprocess_step2(token):
+    tagger = make_tagger()
+    POS_tag = tagger.tag(token)
+    stemmed = stemming(POS_tag)
+    pos = tagger.tag(stemmed)
+    return pos, stemmed
+
+
+def preprocess_step3(pos, stemmed):
+    preprocessed_text, stopwords = remove_stopwords(pos, stemmed)
+    preprocessed_text_string = ' '.join(word for word in preprocessed_text)
+    preprocessed_text_string = re.sub("[a-zA-Z]", "", preprocessed_text_string)  # remove english letters
+    return preprocessed_text_string

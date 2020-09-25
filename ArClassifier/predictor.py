@@ -140,23 +140,23 @@ def predict(text_to_predict, algorithm, user_id, file_name, dataset_file='nada.c
     return category[0], keywords
 
 
-def word_cloud(keywords, result_id):
+def word_cloud(keywords, file_id):
     if not os.path.isdir(os.path.join(BASE_DIR, 'static/media/wordCloud')):
         os.mkdir(os.path.join(BASE_DIR, 'static/media/wordCloud'))
-        return create_word_cloud(keywords, result_id)
-    elif not os.path.isfile(os.path.join(BASE_DIR, 'static/media/wordCloud/'+str(result_id)+'.png')):
-        return create_word_cloud(keywords, result_id)
-    return os.path.join('wordCloud', str(result_id)+'.png')
+        return create_word_cloud(keywords, file_id)
+    elif not os.path.isfile(os.path.join(BASE_DIR, 'static/media/wordCloud/'+str(file_id)+'.png')):
+        return create_word_cloud(keywords, file_id)
+    return os.path.join('wordCloud', str(file_id)+'.png')
 
 
-def create_word_cloud(keywords, result_id):
+def create_word_cloud(keywords, file_id):
     data = arabic_reshaper.reshape(keywords)
     data = get_display(data)  # add this line
-    wordCloud = WordCloud(font_path='arial', background_color='white',mode='RGB', width=2000, height=1000).generate(data)
+    wordCloud = WordCloud(font_path='arial', background_color='white', mode='RGB', width=2000, height=1000).generate(data)
     plt.imshow(wordCloud)
     plt.axis("off")
     plt.tight_layout()
-    plt.savefig(os.path.join(BASE_DIR, 'static/media/wordCloud/'+str(result_id)+'.png'))
+    plt.savefig(os.path.join(BASE_DIR, 'static/media/wordCloud/'+str(file_id)+'.png'))
     plt.show()
-    img_path = os.path.join('wordCloud', str(result_id)+'.png')
+    img_path = os.path.join('wordCloud', str(file_id)+'.png')
     return img_path

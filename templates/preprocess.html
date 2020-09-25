@@ -35,9 +35,23 @@
                             </li>
 
                             <li class="sidenavb active">
-                                <a href="{% url 'projects' %}">
+                                <a href="{% url 'library' %}">
                                     <span class="nav-icon"> <i class="fa fa-book"></i> </span>
-                                    <span class="nav-text">Projects</span>
+                                    <span class="nav-text">Library</span>
+                                </a>
+                            </li>
+
+                            <li class="sidenavb">
+                                <a href="{% url 'classification_project' %}">
+                                    <span class="nav-icon"> <i class="fa fa-chart-line"></i> </span>
+                                    <span class="nav-text">Classification</span>
+                                </a>
+                            </li>
+
+                            <li class="sidenavb">
+                                <a href="{% url 'snetiment_analysis_project' %}">
+                                    <span class="nav-icon"> <i class="fa fa-balance-scale"></i> </span>
+                                    <span class="nav-text">Sentiment Analysis</span>
                                 </a>
                             </li>
 
@@ -117,20 +131,32 @@
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box-header">
-                                <h2><a href="{% url 'project' project.id %}">{{ project.name }}</a> > {{ file.name }} Pre-processing</h2>
+                                <h2>File: {{ file.name }} Pre-processing</h2>
                             </div>
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <small class="text-muted">{{ file.name }} before pre-process</small>
-                                            <textarea rows="15" id="corpus" name="text" class="form-control form-control-lg" disabled spellcheck="false" autocomplete="off" placeholder="">{{ file_content }}</textarea>
+                                            <small class="text-muted">{{ file.name }} Original Content</small>
+                                            <textarea rows="15" id="corpus" name="text" class="form-control form-control-lg" disabled spellcheck="false" dir="rtl" autocomplete="off" placeholder="">{{ file_content }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <small class="text-muted">{{ file.name }} after pre-process</small>
-                                            <textarea rows="15" id="corpus" name="text" class="form-control form-control-lg" disabled spellcheck="false" autocomplete="off" placeholder="">{{ pre_processed_text }}</textarea>
+                                            <small class="text-muted">{{ file.name }} after Normalization</small>
+                                            <textarea rows="15" id="corpus" name="text" class="form-control form-control-lg" disabled spellcheck="false" dir="rtl" autocomplete="off" placeholder="">{{ step_one }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <small class="text-muted">{{ file.name }} after Stemming</small>
+                                            <textarea rows="15" id="corpus" name="text" class="form-control form-control-lg" disabled spellcheck="false" dir="rtl" autocomplete="off" placeholder="">{{ step_two_stemmed }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <small class="text-muted">{{ file.name }} after Removing Stop Words</small>
+                                            <textarea rows="15" id="corpus" name="text" class="form-control form-control-lg" disabled spellcheck="false" dir="rtl" autocomplete="off" placeholder="">{{ step_three }}</textarea>
                                         </div>
                                     </div>
                                 </div>

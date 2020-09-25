@@ -6,14 +6,14 @@ from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.files.storage import default_storage
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
 from ArClassifier.form import LogInForm, SignUpForm, ForgotPassForm
 from ArClassifier.models import MyUser, Project, Dataset, Keyword, Result, Classification, TrainingSet, Metric
 from Text_Classification.settings import BASE_DIR
 
-from .Preprocessing import finale_preprocess
+from .Preprocessing import finale_preprocess, extractorbefore, preprocess_step1, preprocess_step2, preprocess_step3
 from .SAprediction import predict_naive_bayes
 from .predictor import predict, word_cloud
 
@@ -185,14 +185,55 @@ def preprocess_text(request, id):
     with(open(path, 'r', encoding='UTF-8')) as reader:
         file_content = reader.read()
         reader.close()
-    pre_processed_text = finale_preprocess(file_content)
+    step_one = preprocess_step1(file_content)
+    step_two_pos, step_two_stemmed = preprocess_step2(step_one)
+    step_three = preprocess_step3(step_two_pos, step_two_stemmed)
     context = {
         'project': file.project,
-        'pre_processed_text': pre_processed_text,
         'file_content': file_content,
+        'step_one': step_one,
+        'step_two_pos': step_two_pos,
+        'step_two_stemmed': step_two_stemmed,
+        'step_three': step_three,
         'file': file
     }
     return render(request, 'preprocess.html', context)
+
+
+@login_required(login_url='login/')
+def graph(request, id):
+    user_email = request.session['user_email']
+    curernt_user = MyUser.objects.filter(email__exact=user_email).first()
+    file = Dataset.objects.get(id=id)
+    path = file.path
+    with(open(path, 'r', encoding='UTF-8')) as reader:
+        file_content = reader.read()
+        reader.close()
+    keywrds = extractorbefore(file_content, curernt_user.id, file.name)
+    word_cloud(keywrds, "before-" + str(file.id))
+    names = file.name.split('.')
+    name = names[0]
+    context = {
+        'user_id': curernt_user.id,
+        'file': file,
+        'graph': str(curernt_user.id)+'/before-'+name+'.png',
+        'wordcloud': 'before-'+str(file.id)+'.png'
+    }
+    return render(request, 'graph.html', context)
+
+
+def graph_json(request, id):
+    if request.is_ajax and request.method == "GET":
+        file = Dataset.objects.get(id=id)
+        names = file.name.split('.')
+        name = names[0]
+        path = os.path.join(BASE_DIR+'/static/media/graph/9', name+'.json')
+        with(open(path, 'r', encoding="UTF-8")) as reader:
+            file_content = reader.read()
+            data = json.loads(file_content)
+            response = JsonResponse(data, encoder=DjangoJSONEncoder)
+            reader.close()
+        return response
 
 
 @login_required(login_url='login/')
@@ -209,7 +250,7 @@ def sentiment(request, id):
         prediction_class = predict_naive_bayes(file_content)
         c = Classification(training_set=dataset, file=f, project=project, type=prediction_class)
         c.save()
-        return redirect('/project/' + str(id))
+        return redirect('/sentiment/')
     context = {
         'project': project,
         'files': files,
@@ -237,7 +278,7 @@ def classification(request, id):
         algorithm = request.POST.get('algorithm')
         algorithm = str(algorithm).replace(' ', '_')
         file_name = ntpath.basename(f.path)
-        file_name = file_name.split('.')[0]+'.png'
+        file_name = file_name.split('.')[0]
         if algorithm == 'KNN':
             k_value = 5
             category, keywords = predict(file_content, algorithm, current_user.id, file_name, 'nada.csv', k_value)
@@ -340,6 +381,8 @@ def signup_view(request):
                 user.save()
                 login(request, user)
                 request.session['user_email'] = user.email
+                project = Project(name=user.username, description=user.username, owner=user)
+                project.save()
                 if next:
                     return redirect(next)
                 return redirect('/login/')
@@ -377,3 +420,50 @@ def forgotpass_view(request):
                 'form': form,
             }
         return render(request, 'forgotpass.html', context)
+
+
+def library_view(request):
+    if 'user_email' in request.session:
+        user_email = request.session['user_email']
+        current_user = MyUser.objects.filter(email__exact=user_email).first()
+        p = Project.objects.filter(owner=current_user).first()
+        files = Dataset.objects.filter(project__owner_id=current_user.id)
+        hasFiles = False
+        if len(files) > 0:
+            hasFiles = True
+        context = {'project': p, 'files': files, 'hasFiles': hasFiles}
+        return render(request, 'library.html', context)
+
+
+def clasification_projects_view(request):
+    if 'user_email' in request.session:
+        user_email = request.session['user_email']
+        current_user = MyUser.objects.filter(email__exact=user_email).first()
+        p = Project.objects.filter(owner=current_user).first()
+        classifications = Classification.objects.filter(project=p, type='Classification')
+        hasClassification = False
+        if len(classifications) > 0:
+            hasClassification = True
+        context = {
+            'project': p,
+            'hasClassification': hasClassification,
+            'classifications': classifications
+        }
+        return render(request, 'classification_project.html', context)
+
+
+def sentiment_analysis_projects_view(request):
+    if 'user_email' in request.session:
+        user_email = request.session['user_email']
+        current_user = MyUser.objects.filter(email__exact=user_email).first()
+        p = Project.objects.filter(owner=current_user).first()
+        classifications = Classification.objects.filter(project=p, type__endswith='ve')
+        hasClassification = False
+        if len(classifications) > 0:
+            hasClassification = True
+        context = {
+            'project': p,
+            'hasClassification': hasClassification,
+            'classifications': classifications
+        }
+        return render(request, 'sentiment_analysis_project.html', context)
